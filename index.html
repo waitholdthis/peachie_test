@@ -84,6 +84,23 @@ body::after {
   height: 70px;
 }
 
+.nav.scrolled .nav-logo-text {
+  color: var(--charcoal);
+  font-weight: 700;
+}
+
+.nav.scrolled .nav-links a {
+  color: var(--charcoal);
+}
+
+.nav.scrolled .nav-links a:hover {
+  color: var(--blush-deep);
+}
+
+.nav.scrolled .nav-logo img {
+  filter: brightness(0);
+}
+
 .nav-logo {
   display: flex;
   align-items: center;
@@ -97,23 +114,44 @@ body::after {
   width: auto;
   object-fit: contain;
   transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0);
+  filter: brightness(0) invert(1);
   margin-left: -0.75rem;
 }
 
 .nav.scrolled .nav-logo img {
   height: 55px;
+  filter: brightness(0);
 }
 
 .nav-logo-text {
   font-family: var(--heading);
   font-size: clamp(1.1rem, 2vw, 1.4rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.05em;
-  color: var(--charcoal);
+  color: #ffffff;
 }
 
 .nav-logo-text span {
+  display: block;
+  font-size: 0.65em;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blush-deep);
+}
+
+.nav-logo-right {
+  font-family: var(--heading);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  text-align: right;
+  line-height: 1.2;
+  order: 3;
+}
+
+.nav-logo-right span {
   display: block;
   font-size: 0.65em;
   font-weight: 300;
@@ -155,7 +193,7 @@ body::after {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--charcoal);
+  color: #ffffff;
   position: relative;
   padding: 4px 0;
   transition: color 0.3s;
@@ -271,7 +309,7 @@ body::after {
   text-align: center;
   position: relative;
   z-index: 2;
-  padding: 2rem;
+  padding: 6rem 2rem 2rem;
   max-width: 900px;
   display: flex;
   flex-direction: column;
@@ -455,120 +493,114 @@ body::after {
 .about {
   background: var(--white);
   position: relative;
-}
-
-.about-inner {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(3rem, 6vw, 6rem);
-  align-items: center;
-}
-
-.about-image {
-  position: relative;
-  aspect-ratio: 3/4;
   overflow: hidden;
 }
 
-.about-image-inner {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--blush) 0%, var(--blush-light) 50%, var(--cream-dark) 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.about-image-inner::after {
+.about::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(45deg, transparent 40%, rgba(201, 169, 110, 0.1) 60%, transparent 80%);
-}
-
-.about-image-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: var(--blush-deep);
-  opacity: 0.4;
-}
-
-.about-image-icon svg {
-  width: 80px;
-  height: 80px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1;
-}
-
-.about-image-icon span {
-  display: block;
-  margin-top: 1rem;
-  font-family: var(--heading);
-  font-size: 0.85rem;
-  font-style: italic;
-  letter-spacing: 0.1em;
-}
-
-.about-image-frame {
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  bottom: 20px;
-  left: 20px;
-  border: 1px solid var(--gold-light);
+    radial-gradient(ellipse at 20% 50%, rgba(238,214,211,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(201,169,110,0.08) 0%, transparent 55%);
   pointer-events: none;
+}
+
+.about-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.about-text {
+  width: 100%;
+}
+
+.about-text .section-title {
+  margin-bottom: 3rem;
+}
+
+.about-lead {
+  font-family: var(--body);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem) !important;
+  font-weight: 300;
+  line-height: 2 !important;
+  color: var(--charcoal) !important;
+  margin-bottom: 2rem !important;
 }
 
 .about-text p {
   font-family: var(--body);
-  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-size: clamp(0.92rem, 1.2vw, 1.02rem);
   font-weight: 300;
-  line-height: 1.9;
+  line-height: 2;
   color: var(--text-light);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 }
 
 .about-quote {
   font-family: var(--heading) !important;
-  font-size: clamp(1.3rem, 2.2vw, 1.7rem) !important;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem) !important;
   font-weight: 300 !important;
   font-style: italic;
   color: var(--charcoal) !important;
-  line-height: 1.5 !important;
-  border-left: 2px solid var(--gold);
-  padding-left: 2rem;
-  margin: 2.5rem 0 !important;
+  line-height: 1.6 !important;
+  margin: 3.5rem auto !important;
+  max-width: 640px;
+  position: relative;
+  padding: 2.5rem 0 !important;
+  border: none !important;
+}
+
+.about-quote::before,
+.about-quote::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto;
+}
+
+.about-quote::before { margin-bottom: 2rem; }
+.about-quote::after  { margin-top: 2rem; }
+
+.about-ornament {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--gold-light), transparent);
+  margin: 1rem auto 3rem;
 }
 
 .about-stats {
   display: flex;
-  gap: 3rem;
-  margin-top: 2.5rem;
-  padding-top: 2.5rem;
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-top: 1rem;
+  padding-top: 3rem;
   border-top: 1px solid var(--cream-dark);
+  justify-content: center;
 }
 
 .about-stat-num {
   font-family: var(--heading);
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 300;
   color: var(--gold);
   line-height: 1;
 }
 
 .about-stat-label {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-light);
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
 }
 
 /* ========== SERVICES ========== */
@@ -582,9 +614,7 @@ body::after {
 .services::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
 }
@@ -626,12 +656,20 @@ body::after {
   border-color: rgba(201, 169, 110, 0.2);
 }
 
-.service-card-icon {
-  width: 48px;
-  height: 48px;
+.service-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
   margin-bottom: 1.5rem;
-  color: var(--gold);
-  opacity: 0.7;
+  opacity: 0.8;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.95);
+}
+
+.service-card:hover .service-card-img {
+  opacity: 1;
+  filter: brightness(1);
 }
 
 .service-card h3 {
@@ -648,14 +686,17 @@ body::after {
   align-items: baseline;
   padding: 0.75rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 1rem;
 }
 
 .service-item:last-child { border-bottom: none; }
 
 .service-name {
+  display: block;
   font-size: 0.85rem;
-  font-weight: 300;
-  color: rgba(250, 246, 242, 0.8);
+  font-weight: 500;
+  color: rgba(250, 246, 242, 0.92);
+  line-height: 1.3;
 }
 
 .service-duration {
@@ -665,22 +706,23 @@ body::after {
   margin-top: 2px;
 }
 
+.service-desc {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(250, 246, 242, 0.38);
+  margin-top: 5px;
+  max-width: 320px;
+}
+
 .service-price {
   font-family: var(--heading);
   font-size: 1rem;
   font-weight: 400;
   color: var(--gold-light);
   white-space: nowrap;
-  margin-left: 1rem;
-}
-
-.service-desc {
-  font-size: 0.75rem;
-  font-weight: 300;
-  line-height: 1.6;
-  color: rgba(250, 246, 242, 0.35);
-  margin-top: 4px;
-  max-width: 280px;
+  flex-shrink: 0;
 }
 
 /* ========== PORTFOLIO ========== */
@@ -1442,12 +1484,11 @@ body::after {
     grid-template-columns: 1fr;
   }
 
-  .about-image { max-width: 500px; }
-  .about-image-frame { display: none; }
 
   /* Mobile nav */
   .nav-links { display: none; }
   .menu-toggle { display: flex; }
+  .nav-logo-right { display: none; }
 
   .nav-links.open {
     display: flex;
@@ -1629,13 +1670,6 @@ body::after {
   filter: brightness(1);
 }
 
-/* ========== ABOUT REAL IMAGE ========== */
-.about-image-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
 
 /* ========== SHOWCASE STRIP ========== */
 .showcase-strip {
@@ -1830,6 +1864,385 @@ body::after {
   .nav { padding-left: calc(clamp(1.5rem, 4vw, 4rem) + env(safe-area-inset-left)); padding-right: calc(clamp(1.5rem, 4vw, 4rem) + env(safe-area-inset-right)); }
   .lightbox-close { top: calc(1.5rem + env(safe-area-inset-top)); }
 }
+
+/* =============================================
+   CINEMATIC SYSTEM
+   ============================================= */
+
+:root {
+  --ease-expo-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-film:      cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ── HERO: kill old blobs, take over with image ── */
+.hero {
+  background: #0e0b09 !important;
+}
+.hero::before,
+.hero::after {
+  display: none !important;
+}
+
+/* Cinematic bg wrapper — parallax applied via JS */
+.hero-cinematic-bg {
+  position: absolute;
+  top: -28%;
+  left: 0;
+  right: 0;
+  bottom: -5%;
+  z-index: 0;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* Ken Burns slow drift on the image itself */
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  filter: sepia(0.18) saturate(1.1) brightness(0.6) contrast(1.15);
+  animation: kenBurnsHero 36s ease-in-out infinite alternate;
+  transform-origin: 50% 20%;
+  will-change: transform;
+}
+
+@keyframes kenBurnsHero {
+  from { transform: scale(1.0) translate(0%, 0%); }
+  to   { transform: scale(1.12) translate(1.5%, 2.8%); }
+}
+
+/* Multi-layer cinematic vignette */
+.hero-bg-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10,8,6,0.65) 0%, transparent 32%),
+    linear-gradient(to top,    rgba(10,8,6,0.92) 0%, rgba(10,8,6,0.35) 44%, transparent 70%),
+    radial-gradient(ellipse at 50% 30%, transparent 28%, rgba(6,4,2,0.7) 100%);
+}
+
+/* Gold shimmer streak — atmospheric film light leak */
+.hero-bg-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    118deg,
+    transparent 42%,
+    rgba(201,169,110,0.07) 50%,
+    transparent 58%
+  );
+  animation: goldLeak 12s ease-in-out infinite;
+}
+@keyframes goldLeak {
+  0%,100% { opacity: 0; transform: translateX(-8%); }
+  45%, 55% { opacity: 1; transform: translateX(4%); }
+}
+
+/* Scene-change fade — hero photo dissolves to cream at the fold */
+.hero-bg-bottom-fade {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 32%;
+  background: linear-gradient(to bottom, transparent, var(--cream));
+  z-index: 5;
+}
+
+/* ── HERO FOREGROUND DEPTH BLOBS ── */
+.hero-depth-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-depth-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform;
+}
+
+.hero-depth-blob-1 {
+  width: clamp(260px,36vw,520px);
+  height: clamp(260px,36vw,520px);
+  background: radial-gradient(circle, rgba(238,214,211,0.17) 0%, transparent 70%);
+  top: -4%; right: 0%;
+  animation: blobDrift1 24s ease-in-out infinite;
+}
+.hero-depth-blob-2 {
+  width: clamp(200px,28vw,400px);
+  height: clamp(200px,28vw,400px);
+  background: radial-gradient(circle, rgba(201,169,110,0.11) 0%, transparent 70%);
+  bottom: 12%; left: 2%;
+  animation: blobDrift2 30s ease-in-out infinite;
+}
+.hero-depth-blob-3 {
+  width: clamp(320px,48vw,650px);
+  height: clamp(320px,48vw,650px);
+  background: radial-gradient(circle, rgba(212,169,164,0.07) 0%, transparent 70%);
+  top: 38%; left: 32%;
+  animation: blobDrift3 38s ease-in-out infinite;
+}
+
+@keyframes blobDrift1 {
+  0%,100% { transform: translate(0,0); }
+  33%      { transform: translate(-28px,18px); }
+  66%      { transform: translate(16px,-14px); }
+}
+@keyframes blobDrift2 {
+  0%,100% { transform: translate(0,0); }
+  50%      { transform: translate(24px,-30px); }
+}
+@keyframes blobDrift3 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  25%      { transform: translate(-18px,12px) scale(1.04); }
+  75%      { transform: translate(14px,-22px) scale(0.96); }
+}
+
+/* ── HERO CONTENT: light text for dark bg ── */
+.hero-content { z-index: 2; will-change: opacity, transform; }
+
+.hero h1 { color: var(--cream) !important; }
+.hero h1 em { color: var(--blush) !important; }
+.hero-sub { color: rgba(250,246,242,0.70) !important; }
+.hero-badge {
+  color: var(--gold-light) !important;
+  border-color: rgba(201,169,110,0.32) !important;
+  background: rgba(14,11,9,0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.hero-badge::before,
+.hero-badge::after { background: rgba(201,169,110,0.4) !important; }
+.hero-divider { background: rgba(201,169,110,0.55) !important; }
+.hero-logo { filter: brightness(0) invert(1) !important; opacity: 0.88; }
+.hero-cta {
+  background: rgba(250,246,242,0.07) !important;
+  border: 1px solid rgba(250,246,242,0.38) !important;
+  color: var(--cream) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.hero-cta::before { background: var(--gold) !important; }
+.hero-cta:hover {
+  border-color: var(--gold) !important;
+  color: var(--charcoal) !important;
+}
+.hero-scroll { color: rgba(250,246,242,0.42) !important; }
+.hero-scroll::after {
+  background: linear-gradient(to bottom, rgba(201,169,110,0.55), transparent) !important;
+}
+.hero-mosaic-img {
+  border-color: rgba(250,246,242,0.18) !important;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.45) !important;
+}
+
+/* ── KEN BURNS ON STAFF PORTRAITS ── */
+
+.staff-photo {
+  overflow: hidden;
+}
+.staff-photo img {
+  will-change: transform;
+  animation: kenBurnsPortrait 28s ease-in-out infinite alternate-reverse;
+  transform-origin: center 18%;
+  filter: sepia(0.08) saturate(1.1) brightness(0.96) contrast(1.03);
+  transition: filter 0.6s var(--ease-cinematic);
+}
+
+@keyframes kenBurnsPortrait {
+  from { transform: scale(1.0) translate(0%,   0%); }
+  to   { transform: scale(1.08) translate(1.2%, -1.2%); }
+}
+
+/* ── CINEMATIC COLOR GRADING ── */
+
+.portfolio-item img {
+  filter: sepia(0.06) saturate(1.06) brightness(0.96);
+  transition:
+    transform 1.0s var(--ease-cinematic),
+    filter 0.75s var(--ease-cinematic) !important;
+}
+.portfolio-item:hover img {
+  filter: sepia(0.02) saturate(1.18) brightness(1.03) !important;
+  transform: scale(1.07) !important;
+}
+
+/* ── INFINITE MARQUEE REEL ── */
+.showcase-marquee {
+  overflow: hidden;
+  position: relative;
+  height: 165px;
+  background: var(--cream-dark);
+}
+.showcase-marquee::before,
+.showcase-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 110px;
+  z-index: 2;
+  pointer-events: none;
+}
+.showcase-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--cream), transparent);
+}
+.showcase-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--cream), transparent);
+}
+
+.showcase-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeReel 48s linear infinite;
+  will-change: transform;
+}
+.showcase-marquee-track:hover { animation-play-state: paused; }
+
+@keyframes marqueeReel {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.showcase-marquee-item {
+  width: 210px;
+  height: 165px;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.showcase-marquee-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: sepia(0.08) saturate(1.0) brightness(0.90);
+  transition: filter 0.65s var(--ease-cinematic), transform 0.9s var(--ease-cinematic);
+  transform: scale(1.02);
+}
+.showcase-marquee-item:hover img {
+  filter: sepia(0.02) saturate(1.2) brightness(1.02);
+  transform: scale(1.09);
+}
+.showcase-marquee-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2.2rem 0.75rem 0.55rem;
+  background: linear-gradient(to top, rgba(42,42,42,0.58), transparent);
+  font-family: var(--body);
+  font-size: 0.53rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(250,246,242,0.88);
+  pointer-events: none;
+}
+
+/* Thin vertical dividers between reel items */
+.showcase-marquee-item::after {
+  content: '';
+  position: absolute;
+  top: 15%; bottom: 15%;
+  right: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+/* ── ENHANCED SCROLL REVEALS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(38px);
+  transition:
+    opacity  1.05s var(--ease-expo-out),
+    transform 1.05s var(--ease-expo-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image panels scale in for extra depth */
+.staff-photo.reveal {
+  transform: translateY(28px) scale(0.975);
+  transition:
+    opacity  1.3s var(--ease-expo-out),
+    transform 1.3s var(--ease-expo-out);
+}
+.staff-photo.reveal.visible {
+  transform: translateY(0) scale(1);
+}
+
+/* Service card stagger with slight X drift */
+.service-card.reveal {
+  transform: translateY(30px) translateX(-12px);
+  transition:
+    opacity  0.95s var(--ease-expo-out),
+    transform 0.95s var(--ease-expo-out);
+}
+.service-card.reveal.visible {
+  transform: translateY(0) translateX(0);
+}
+
+/* ── STAFF → VIDEOS SECTION BLEND ── */
+.staff {
+  position: relative;
+}
+.staff::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, var(--charcoal));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-img,
+  .staff-photo img,
+  .showcase-marquee-track,
+  .hero-depth-blob,
+  .hero-bg-shimmer {
+    animation: none !important;
+  }
+  .hero-bg-img { transform: scale(1.06) !important; }
+  .staff-photo img { transform: scale(1.03) !important; }
+  .reveal {
+    transition-duration: 0.3s !important;
+  }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .showcase-marquee { height: 125px; }
+  .showcase-marquee-item { width: 155px; height: 125px; }
+  .hero-depth-blob-3 { display: none; }
+  .staff::after { display: none; }
+}
+@media (max-width: 600px) {
+  .showcase-marquee { height: 98px; }
+  .showcase-marquee-item { width: 125px; height: 98px; }
+  .showcase-marquee-label { font-size: 0.48rem; padding: 1.6rem 0.5rem 0.4rem; }
+  .showcase-marquee::before,
+  .showcase-marquee::after { width: 60px; }
+  .hero-depth-blob-1 { opacity: 0.6; }
+  .hero-depth-blob-2 { opacity: 0.5; }
+}
+
+/* =============================================
+   SERVICES: CINEMATIC CARD REDESIGN
+   ============================================= */
+
+
+/* ── CARD PHOTO ── */
 </style>
 </head>
 <body>
@@ -1863,10 +2276,22 @@ body::after {
 
 <!-- Hero -->
 <section class="hero" id="home">
+  <!-- Cinematic background: Ken Burns + parallax -->
+  <div class="hero-cinematic-bg" aria-hidden="true">
+    <img class="hero-bg-img" src="images/FayClockTower.jpg" alt="Fayetteville Clock Tower">
+    <div class="hero-bg-vignette"></div>
+    <div class="hero-bg-shimmer"></div>
+    <div class="hero-bg-bottom-fade"></div>
+  </div>
+  <!-- Foreground depth blobs — z-layer separation -->
+  <div class="hero-depth-layer" aria-hidden="true">
+    <div class="hero-depth-blob hero-depth-blob-1"></div>
+    <div class="hero-depth-blob hero-depth-blob-2"></div>
+    <div class="hero-depth-blob hero-depth-blob-3"></div>
+  </div>
   <div class="hero-content">
     <div class="hero-badge reveal">North Carolina</div>
     <div class="hero-heading-row reveal reveal-delay-1">
-      <img src="logo.webp" alt="Diverse Hair Designs by Peachie" class="hero-logo">
       <h1>Your Hair,<br>Our <em>Artistry</em></h1>
     </div>
     <div class="hero-divider reveal reveal-delay-2"></div>
@@ -1889,46 +2314,75 @@ body::after {
   </a>
 </section>
 
-<!-- Showcase Strip -->
-<div class="showcase-strip">
-  <div class="showcase-strip-item"><img src="gallery/03.jpeg" alt="Color" loading="lazy"><span class="showcase-strip-label">Color</span></div>
-  <div class="showcase-strip-item"><img src="gallery/10.jpeg" alt="Balayage" loading="lazy"><span class="showcase-strip-label">Balayage</span></div>
-  <div class="showcase-strip-item"><img src="gallery/18.jpeg" alt="Highlights" loading="lazy"><span class="showcase-strip-label">Highlights</span></div>
-  <div class="showcase-strip-item"><img src="gallery/25.jpeg" alt="Cut &amp; Style" loading="lazy"><span class="showcase-strip-label">Cut & Style</span></div>
-  <div class="showcase-strip-item"><img src="gallery/30.jpeg" alt="Styling" loading="lazy"><span class="showcase-strip-label">Styling</span></div>
-  <div class="showcase-strip-item"><img src="gallery/40.jpeg" alt="Treatments" loading="lazy"><span class="showcase-strip-label">Treatments</span></div>
-  <div class="showcase-strip-item"><img src="gallery/50.jpeg" alt="Transformation" loading="lazy"><span class="showcase-strip-label">Transformation</span></div>
+<!-- Cinematic Marquee Reel -->
+<div class="showcase-marquee" aria-label="Portfolio preview reel">
+  <div class="showcase-marquee-track">
+    <!-- Set A -->
+    <div class="showcase-marquee-item"><img src="gallery/03.jpeg" alt="Color" loading="lazy"><span class="showcase-marquee-label">Color</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-color1.jpg" alt="Balayage" loading="lazy"><span class="showcase-marquee-label">Balayage</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/10.jpeg" alt="Highlights" loading="lazy"><span class="showcase-marquee-label">Highlights</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-highlights1.jpg" alt="Color" loading="lazy"><span class="showcase-marquee-label">Color</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/18.jpeg" alt="Styling" loading="lazy"><span class="showcase-marquee-label">Styling</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/25.jpeg" alt="Cut &amp; Style" loading="lazy"><span class="showcase-marquee-label">Cut &amp; Style</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-updo1.jpeg" alt="Updo" loading="lazy"><span class="showcase-marquee-label">Updo</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/30.jpeg" alt="Transformation" loading="lazy"><span class="showcase-marquee-label">Transformation</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-treatment1.jpeg" alt="Treatment" loading="lazy"><span class="showcase-marquee-label">Treatment</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/40.jpeg" alt="Color" loading="lazy"><span class="showcase-marquee-label">Color</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/50.jpeg" alt="Styling" loading="lazy"><span class="showcase-marquee-label">Styling</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-smooth1.jpeg" alt="Treatment" loading="lazy"><span class="showcase-marquee-label">Treatment</span></div>
+    <!-- Set B — duplicate for seamless loop -->
+    <div class="showcase-marquee-item"><img src="gallery/03.jpeg" alt="Color" loading="lazy"><span class="showcase-marquee-label">Color</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-color1.jpg" alt="Balayage" loading="lazy"><span class="showcase-marquee-label">Balayage</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/10.jpeg" alt="Highlights" loading="lazy"><span class="showcase-marquee-label">Highlights</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-highlights1.jpg" alt="Color" loading="lazy"><span class="showcase-marquee-label">Color</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/18.jpeg" alt="Styling" loading="lazy"><span class="showcase-marquee-label">Styling</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/25.jpeg" alt="Cut &amp; Style" loading="lazy"><span class="showcase-marquee-label">Cut &amp; Style</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-updo1.jpeg" alt="Updo" loading="lazy"><span class="showcase-marquee-label">Updo</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/30.jpeg" alt="Transformation" loading="lazy"><span class="showcase-marquee-label">Transformation</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-treatment1.jpeg" alt="Treatment" loading="lazy"><span class="showcase-marquee-label">Treatment</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/40.jpeg" alt="Color" loading="lazy"><span class="showcase-marquee-label">Color</span></div>
+    <div class="showcase-marquee-item"><img src="gallery/50.jpeg" alt="Styling" loading="lazy"><span class="showcase-marquee-label">Styling</span></div>
+    <div class="showcase-marquee-item"><img src="images/service-smooth1.jpeg" alt="Treatment" loading="lazy"><span class="showcase-marquee-label">Treatment</span></div>
+  </div>
 </div>
 
 <!-- About -->
 <section class="about section" id="about">
   <div class="about-inner">
-    <div class="about-image reveal">
-      <div class="about-image-inner">
-        <img src="images/hero-salon.jpg" alt="Diverse Hair Designs salon — Peachie at work">
-      </div>
-      <div class="about-image-frame"></div>
-    </div>
     <div class="about-text">
       <div class="section-label reveal">Our Story</div>
       <h2 class="section-title reveal reveal-delay-1">Where Beauty Meets <em>Intention</em></h2>
-      <p class="reveal reveal-delay-2">
-        At Diverse Hair Designs by Peachie, we believe every visit should feel like a personal retreat. Our approach is simple yet rare in today's fast-paced world — we dedicate our full attention to one client at a time.
+
+      <p class="about-lead reveal reveal-delay-2">
+        Nestled in the heart of Fayetteville, North Carolina, Diverse Hair Designs by Peachie was built on a single, unwavering belief — that you deserve more than a haircut. You deserve a moment that is entirely, unhurriedly yours.
       </p>
+
       <p class="about-quote reveal reveal-delay-2">
         "We find it very important that our clients feel empowered, and embrace the importance of self care."
       </p>
+
       <p class="reveal reveal-delay-3">
-        From precision cuts to transformative color work, every service is performed with meticulous care and artistic vision. Your hair tells your story — we're here to make sure it's beautifully told.
+        In a world that moves too fast, we slow down. Every appointment is one-on-one — no overlap, no rush, no distraction. Just Peachie, her craft, and you. From the moment you arrive, the outside world fades. What remains is calm, intention, and the quiet confidence that comes from being truly seen.
       </p>
+
+      <p class="reveal reveal-delay-3">
+        With over 14 years of experience and a deep passion for the artistry of hair, Peachie brings precision, creativity, and warmth to every service. Whether it's a sun-kissed balayage, a transformative color correction, or a clean, confident cut — each result is shaped around your life, your texture, and your vision.
+      </p>
+
+      <div class="about-ornament reveal reveal-delay-3" aria-hidden="true"></div>
+
       <div class="about-stats reveal reveal-delay-3">
         <div>
+          <div class="about-stat-num">14+</div>
+          <div class="about-stat-label">Years of Experience</div>
+        </div>
+        <div>
           <div class="about-stat-num">1:1</div>
-          <div class="about-stat-label">Client Attention</div>
+          <div class="about-stat-label">Undivided Attention</div>
         </div>
         <div>
           <div class="about-stat-num">100%</div>
-          <div class="about-stat-label">Dedicated Focus</div>
+          <div class="about-stat-label">Dedicated to You</div>
         </div>
       </div>
     </div>
@@ -1943,7 +2397,8 @@ body::after {
     <p class="reveal reveal-delay-2">Each service is tailored to your unique hair type, lifestyle, and personal style. All pricing reflects starting rates.</p>
   </div>
   <div class="services-grid">
-    <!-- Color Services -->
+
+    <!-- Color -->
     <div class="service-card reveal">
       <img class="service-card-img" src="images/service-color1.jpg" alt="Hair color transformation" loading="lazy">
       <h3>Color</h3>
@@ -2050,6 +2505,7 @@ body::after {
         <span class="service-price">$220–$300</span>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -2137,9 +2593,7 @@ body::after {
     <p class="reveal reveal-delay-2">Get a first peek at the behind-the-scenes making our day productive.</p>
   </div>
   <div class="videos-grid">
-    <div class="video-card reveal">
-      <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/ca2acd08c2114ee8900e6d5c980d632d/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
+
     <div class="video-card reveal reveal-delay-1">
       <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/8a0a3f1b9e9a439a8dfc34d04fe10bfb/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
@@ -2257,10 +2711,31 @@ body::after {
   const nav = document.getElementById('nav');
   const backToTop = document.getElementById('backToTop');
 
+  // Cinematic parallax targets
+  var heroCinBg    = document.querySelector('.hero-cinematic-bg');
+  var heroContentEl = document.querySelector('.hero-content');
+  var heroEl       = document.getElementById('home');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   function onScroll() {
-    const y = window.scrollY;
+    var y = window.scrollY;
     nav.classList.toggle('scrolled', y > 60);
     backToTop.classList.toggle('visible', y > 600);
+
+    if (!reducedMotion) {
+      // Background drifts down slower than the page — creates depth separation
+      if (heroCinBg) {
+        heroCinBg.style.transform = 'translateY(' + (y * 0.22) + 'px)';
+      }
+
+      // Hero content: slow upward counterdrift + atmospheric fade as user leaves
+      if (heroContentEl && heroEl) {
+        var heroH = heroEl.offsetHeight;
+        var ratio = Math.min(y / (heroH * 0.72), 1);
+        heroContentEl.style.opacity  = Math.max(0, 1 - ratio * 0.82).toFixed(3);
+        heroContentEl.style.transform = 'translateY(' + (y * -0.09) + 'px)';
+      }
+    }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -2657,6 +3132,7 @@ body::after {
       }
     }
   }
+
 
   // Load data (graceful degradation — if it fails, hardcoded content stays)
   loadSiteData();
