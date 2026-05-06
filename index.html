@@ -123,6 +123,10 @@ body::after {
   filter: brightness(0);
 }
 
+.nav.scrolled .menu-toggle span {
+  background: #111111;
+}
+
 .nav-logo-text {
   font-family: var(--heading);
   font-size: clamp(1.1rem, 2vw, 1.4rem);
@@ -213,6 +217,15 @@ body::after {
 .nav-links a:hover { color: var(--blush-deep); }
 .nav-links a:hover::after { width: 100%; }
 
+.nav-links.open a,
+.nav-links.open a:visited {
+  color: #111111 !important;
+}
+
+.nav-links.open {
+  background: #faf6f2;
+}
+
 .nav-book {
   font-family: var(--body) !important;
   font-size: 0.68rem !important;
@@ -248,9 +261,13 @@ body::after {
 .menu-toggle span {
   width: 24px;
   height: 1.5px;
-  background: var(--charcoal);
+  background: #ffffff;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
+}
+
+.menu-toggle.active span {
+  background: #111111;
 }
 
 .menu-toggle.active span:nth-child(1) {
