@@ -3,159 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diverse Hair Designs by Peachie | North Carolina</title>
-<meta name="description" content="Luxury hair salon in North Carolina offering personalized, one-on-one hair services including balayage, color, cuts, and styling.">
-<link rel="icon" type="image/png" href="favicon.png">
+<title>Diverse Hair Designs by Peachie | Luxury Hair Salon · North Carolina</title>
+<meta name="description" content="Luxury one-on-one hair salon in North Carolina. Specializing in balayage, color, cuts, and styling. One client at a time — because you deserve undivided attention.">
+<link rel="icon" type="image/webp" href="favicon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
+/* ===== RESET & BASE ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --blush: #eed6d3;
-  --blush-light: #f7ece9;
-  --blush-deep: #d4a9a4;
-  --gold: #c9a96e;
-  --gold-light: #e8d5a8;
-  --charcoal: #2a2a2a;
-  --charcoal-soft: #3d3d3d;
-  --cream: #faf6f2;
-  --cream-dark: #f0e8e0;
-  --white: #ffffff;
-  --text: #2a2a2a;
-  --text-light: #6b6060;
-  --heading: 'Cormorant Garamond', Georgia, serif;
-  --body: 'Jost', sans-serif;
+  --bg:        #0d0b0a;
+  --bg-raised: #131110;
+  --bg-card:   #181412;
+  --divider:   #1e1a18;
+  --text:      #f5ede3;
+  --text-muted:#a89080;
+  --peach:     #e8a87c;
+  --peach-deep:#c97b5a;
+  --serif:     'Cormorant Garamond', Georgia, serif;
+  --sans:      'DM Sans', system-ui, sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  font-family: var(--body);
+  font-family: var(--sans);
+  background: var(--bg);
   color: var(--text);
-  background: var(--cream);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
+body.loaded { opacity: 1; }
+
 /* Grain overlay */
-body::after {
+body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px;
+  z-index: 9998;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--cream); }
-::-webkit-scrollbar-thumb { background: var(--blush-deep); border-radius: 3px; }
-
 /* Selection */
-::selection { background: var(--blush); color: var(--charcoal); }
+::selection { background: var(--peach); color: var(--bg); }
 
-/* ========== NAVIGATION ========== */
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--peach-deep); border-radius: 2px; }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+
+/* ===== NAVIGATION ===== */
 .nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
-  padding: 0 clamp(1.5rem, 4vw, 4rem);
-  height: 80px;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
 .nav.scrolled {
-  background: rgba(250, 246, 242, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(212, 169, 164, 0.2);
-  height: 70px;
+  background: rgba(13,11,10,0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--divider);
+  height: 72px;
 }
 
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
   text-decoration: none;
-  line-height: 1.2;
+  gap: 0.6rem;
 }
 
 .nav-logo img {
-  height: 70px;
+  height: 64px;
   width: auto;
   object-fit: contain;
-  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0);
-  margin-left: -0.75rem;
+  filter: brightness(0) invert(1);
+  transition: height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  opacity: 0.9;
 }
 
-.nav.scrolled .nav-logo img {
-  height: 55px;
-}
-
-.nav-logo-text {
-  font-family: var(--heading);
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: var(--charcoal);
-}
-
-.nav-logo-text span {
-  display: block;
-  font-size: 0.65em;
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--blush-deep);
-}
-
-.hero-heading-row {
-  display: flex;
-  align-items: center;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.hero-logo {
-  width: clamp(100px, 15vw, 180px);
-  height: auto;
-  filter: brightness(0) drop-shadow(0 4px 20px rgba(42, 42, 42, 0.15));
-}
-
-@media (max-width: 600px) {
-  .hero-heading-row {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
+.nav.scrolled .nav-logo img { height: 52px; }
+.nav-logo:hover img { opacity: 1; }
 
 .nav-links {
   display: flex;
-  gap: clamp(1.2rem, 2.5vw, 2.5rem);
+  gap: clamp(1rem, 2vw, 2rem);
   list-style: none;
   align-items: center;
 }
 
 .nav-links a {
-  font-family: var(--body);
-  font-size: 0.72rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--charcoal);
+  color: rgba(245,237,227,0.7);
   position: relative;
   padding: 4px 0;
   transition: color 0.3s;
@@ -164,1603 +136,858 @@ body::after {
 .nav-links a::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--peach);
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
 }
 
-.nav-links a:hover { color: var(--blush-deep); }
+.nav-links a:hover { color: var(--text); }
 .nav-links a:hover::after { width: 100%; }
 
 .nav-book {
-  font-family: var(--body) !important;
-  font-size: 0.68rem !important;
+  font-family: var(--sans) !important;
+  font-size: 0.65rem !important;
+  font-weight: 500 !important;
   letter-spacing: 0.2em !important;
-  text-transform: uppercase;
-  padding: 10px 24px !important;
-  background: var(--charcoal);
-  color: var(--cream) !important;
-  border: none;
-  cursor: pointer;
+  text-transform: uppercase !important;
+  padding: 10px 22px !important;
+  background: transparent !important;
+  color: var(--peach) !important;
+  border: 1px solid var(--peach) !important;
+  border-radius: 100px !important;
   transition: all 0.4s !important;
-}
-
-.nav-book:hover {
-  background: var(--gold) !important;
-  color: var(--charcoal) !important;
+  animation: pulse-glow 2s ease 1.5s 3;
 }
 
 .nav-book::after { display: none !important; }
 
-/* Mobile menu */
+.nav-book:hover {
+  background: var(--peach) !important;
+  color: var(--bg) !important;
+  box-shadow: 0 0 24px rgba(232,168,124,0.3) !important;
+}
+
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(232,168,124,0); }
+  50% { box-shadow: 0 0 20px 4px rgba(232,168,124,0.35); }
+}
+
+/* Hamburger */
 .menu-toggle {
   display: none;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
-  padding: 8px;
-  z-index: 1001;
+  padding: 4px;
   background: none;
   border: none;
+  z-index: 1001;
 }
 
 .menu-toggle span {
-  width: 24px;
-  height: 1.5px;
-  background: var(--charcoal);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  width: 26px;
+  height: 1px;
+  background: var(--text);
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
   transform-origin: center;
 }
 
-.menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(4px, 5px);
-}
-.menu-toggle.active span:nth-child(2) { opacity: 0; }
-.menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(4px, -5px);
-}
+.menu-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-/* ========== HERO ========== */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: linear-gradient(160deg, var(--cream) 0%, var(--blush-light) 40%, var(--blush) 70%, var(--cream-dark) 100%);
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 60vw;
-  height: 60vw;
-  max-width: 800px;
-  max-height: 800px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
-  animation: heroFloat 20s ease-in-out infinite;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -10%;
-  left: -5%;
-  width: 40vw;
-  height: 40vw;
-  max-width: 600px;
-  max-height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(238, 214, 211, 0.3) 0%, transparent 70%);
-  animation: heroFloat 15s ease-in-out infinite reverse;
-}
-
-@keyframes heroFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-20px, 20px) scale(1.05); }
-}
-
-.hero-content {
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  padding: 2rem;
-  max-width: 900px;
+/* Mobile overlay */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 999;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  list-style: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+.nav-overlay.open { opacity: 1; pointer-events: all; }
+
+.nav-overlay a {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.3s;
+}
+
+.nav-overlay a:hover { color: var(--peach); }
+
+.nav-overlay .overlay-book {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  border: 1px solid var(--peach);
+  border-radius: 100px;
+  color: var(--peach) !important;
+  margin-top: 1rem;
+  transition: all 0.4s;
+}
+
+.nav-overlay .overlay-book:hover {
+  background: var(--peach) !important;
+  color: var(--bg) !important;
+}
+
+/* ===== HERO ===== */
+#home {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--bg);
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  padding-top: 120px;
+  padding-bottom: 100px;
 }
 
 .hero-badge {
-  display: inline-block;
-  font-family: var(--body);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
   font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid var(--gold-light);
-  padding: 10px 28px;
-  margin-bottom: 3rem;
-  position: relative;
+  color: var(--peach);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fade-up 1s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
 }
 
-.hero-badge::before,
-.hero-badge::after {
+.hero-badge::before {
   content: '';
-  position: absolute;
-  top: 50%;
-  width: 40px;
+  display: block;
+  width: 32px;
   height: 1px;
-  background: var(--gold-light);
+  background: var(--peach);
 }
-.hero-badge::before { right: calc(100% + 16px); }
-.hero-badge::after { left: calc(100% + 16px); }
 
-.hero h1 {
-  font-family: var(--heading);
-  font-size: clamp(3.2rem, 8vw, 7rem);
-  font-weight: 300;
-  line-height: 1.05;
-  color: var(--charcoal);
-  margin-bottom: 0.5em;
+.hero-heading {
+  font-family: var(--serif);
+  font-size: clamp(4rem, 7.5vw, 8rem);
+  font-weight: 500;
+  line-height: 1.0;
   letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fade-up 1.1s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
 }
 
-.hero h1 em {
+.hero-heading em {
   font-style: italic;
+  color: var(--peach);
   font-weight: 400;
-  color: var(--blush-deep);
-}
-
-.hero-divider {
-  width: 60px;
-  height: 1px;
-  background: var(--gold);
-  margin: 2rem auto;
 }
 
 .hero-sub {
-  font-family: var(--heading);
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-family: var(--sans);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
   font-weight: 300;
-  font-style: italic;
-  color: var(--text-light);
-  letter-spacing: 0.02em;
-  line-height: 1.6;
-  max-width: 500px;
-  margin: 0 auto 3rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  animation: fade-up 1.1s cubic-bezier(0.16,1,0.3,1) 0.7s forwards;
 }
 
 .hero-cta {
   display: inline-block;
-  font-family: var(--body);
-  font-size: 0.7rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  padding: 18px 50px;
-  background: var(--charcoal);
-  color: var(--cream);
   text-decoration: none;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text);
+  padding: 18px 44px;
+  border: 1px solid rgba(245,237,227,0.35);
+  border-radius: 100px;
+  transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  animation: fade-up 1.1s cubic-bezier(0.16,1,0.3,1) 0.9s forwards;
 }
 
 .hero-cta::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--gold);
+  background: var(--peach);
   transform: translateX(-101%);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  border-radius: 100px;
 }
 
-.hero-cta:hover { color: var(--charcoal); }
+.hero-cta:hover {
+  border-color: var(--peach);
+  color: var(--bg);
+}
+
 .hero-cta:hover::before { transform: translateX(0); }
+
 .hero-cta span { position: relative; z-index: 1; }
 
-.hero-scroll {
+/* Hero image collage */
+.hero-collage {
   position: absolute;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: var(--text-light);
-}
-
-.hero-scroll span {
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-}
-
-.hero-scroll::after {
-  content: '';
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollLine 2s ease-in-out infinite;
-}
-
-@keyframes scrollLine {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  51% { transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
-
-/* ========== SECTION SHARED ========== */
-.section {
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem);
-}
-
-.section-label {
-  font-family: var(--body);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.5rem;
-}
-
-.section-title {
-  font-family: var(--heading);
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  font-weight: 300;
-  line-height: 1.15;
-  color: var(--charcoal);
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.01em;
-}
-
-.section-title em {
-  font-style: italic;
-  color: var(--blush-deep);
-}
-
-/* Reveal animation */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-delay-1 { transition-delay: 0.15s; }
-.reveal-delay-2 { transition-delay: 0.3s; }
-.reveal-delay-3 { transition-delay: 0.45s; }
-.reveal-delay-4 { transition-delay: 0.6s; }
-
-/* ========== ABOUT ========== */
-.about {
-  background: var(--white);
-  position: relative;
-}
-
-.about-inner {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(3rem, 6vw, 6rem);
-  align-items: center;
-}
-
-.about-image {
-  position: relative;
-  aspect-ratio: 3/4;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
   overflow: hidden;
+  z-index: 1;
 }
 
-.about-image-inner {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--blush) 0%, var(--blush-light) 50%, var(--cream-dark) 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.about-image-inner::after {
+.hero-collage::before {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(45deg, transparent 40%, rgba(201, 169, 110, 0.1) 60%, transparent 80%);
+  background: linear-gradient(90deg, var(--bg) 0%, rgba(13,11,10,0.5) 50%, transparent 100%);
+  z-index: 2;
 }
 
-.about-image-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: var(--blush-deep);
-  opacity: 0.4;
-}
-
-.about-image-icon svg {
-  width: 80px;
-  height: 80px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1;
-}
-
-.about-image-icon span {
-  display: block;
-  margin-top: 1rem;
-  font-family: var(--heading);
-  font-size: 0.85rem;
-  font-style: italic;
-  letter-spacing: 0.1em;
-}
-
-.about-image-frame {
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  bottom: 20px;
-  left: 20px;
-  border: 1px solid var(--gold-light);
-  pointer-events: none;
-}
-
-.about-text p {
-  font-family: var(--body);
-  font-size: clamp(0.9rem, 1.2vw, 1rem);
-  font-weight: 300;
-  line-height: 1.9;
-  color: var(--text-light);
-  margin-bottom: 1.5rem;
-}
-
-.about-quote {
-  font-family: var(--heading) !important;
-  font-size: clamp(1.3rem, 2.2vw, 1.7rem) !important;
-  font-weight: 300 !important;
-  font-style: italic;
-  color: var(--charcoal) !important;
-  line-height: 1.5 !important;
-  border-left: 2px solid var(--gold);
-  padding-left: 2rem;
-  margin: 2.5rem 0 !important;
-}
-
-.about-stats {
-  display: flex;
-  gap: 3rem;
-  margin-top: 2.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--cream-dark);
-}
-
-.about-stat-num {
-  font-family: var(--heading);
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--gold);
-  line-height: 1;
-}
-
-.about-stat-label {
-  font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-light);
-  margin-top: 0.5rem;
-}
-
-/* ========== SERVICES ========== */
-.services {
-  background: var(--charcoal);
-  color: var(--cream);
-  position: relative;
-  overflow: hidden;
-}
-
-.services::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-}
-
-.services .section-label { color: var(--gold-light); }
-.services .section-title { color: var(--cream); }
-.services .section-title em { color: var(--blush); }
-
-.services-header {
-  max-width: 600px;
-  margin-bottom: 4rem;
-}
-
-.services-header p {
-  font-weight: 300;
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: rgba(250, 246, 242, 0.6);
-}
-
-.services-grid {
+.hero-collage-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 2px;
-  max-width: 1300px;
-  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 4px;
+  height: 100%;
+  opacity: 0;
+  animation: fade-in 1.5s ease 1s forwards;
+  transform: translateX(30px);
+  animation: slide-in-right 1.5s cubic-bezier(0.16,1,0.3,1) 0.8s forwards;
 }
 
-.service-card {
-  background: rgba(255, 255, 255, 0.03);
-  padding: clamp(2rem, 3vw, 3rem);
-  position: relative;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.service-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(201, 169, 110, 0.2);
-}
-
-.service-card-icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 1.5rem;
-  color: var(--gold);
-  opacity: 0.7;
-}
-
-.service-card h3 {
-  font-family: var(--heading);
-  font-size: 1.6rem;
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-  color: var(--cream);
-}
-
-.service-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.service-item:last-child { border-bottom: none; }
-
-.service-name {
-  font-size: 0.85rem;
-  font-weight: 300;
-  color: rgba(250, 246, 242, 0.8);
-}
-
-.service-duration {
-  display: block;
-  font-size: 0.68rem;
-  color: rgba(250, 246, 242, 0.35);
-  margin-top: 2px;
-}
-
-.service-price {
-  font-family: var(--heading);
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--gold-light);
-  white-space: nowrap;
-  margin-left: 1rem;
-}
-
-.service-desc {
-  font-size: 0.75rem;
-  font-weight: 300;
-  line-height: 1.6;
-  color: rgba(250, 246, 242, 0.35);
-  margin-top: 4px;
-  max-width: 280px;
-}
-
-/* ========== PORTFOLIO ========== */
-.portfolio { background: var(--cream); }
-
-.portfolio-header {
-  max-width: 600px;
-  margin-bottom: 4rem;
-}
-
-.portfolio-header p {
-  font-weight: 300;
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: var(--text-light);
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.portfolio-item {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  aspect-ratio: 1;
-}
-
-.portfolio-item:nth-child(1) {
-  grid-column: 1 / 3;
-  grid-row: 1 / 3;
-}
-
-.portfolio-item img {
+.hero-collage-grid img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.portfolio-item:hover img { transform: scale(1.06); }
+.hero-collage-grid .c-tall {
+  grid-row: span 2;
+}
 
-.portfolio-item::before {
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: clamp(1.5rem, 5vw, 5rem);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  opacity: 0;
+  animation: fade-up 1s ease 1.4s forwards;
+}
+
+.hero-scroll-text {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  writing-mode: vertical-rl;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
+  animation: scroll-line 2s ease-in-out 1.6s infinite;
+}
+
+@keyframes scroll-line {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== TICKER ===== */
+.ticker {
+  background: var(--divider);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 1.4rem 0;
+  overflow: hidden;
+}
+
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker-scroll 28s linear infinite;
+}
+
+.ticker-track:hover { animation-play-state: paused; }
+
+.ticker-item {
+  font-family: var(--serif);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(245,237,227,0.45);
+  padding: 0 2.5rem;
+  flex-shrink: 0;
+}
+
+.ticker-item.accent { color: var(--peach); }
+
+.ticker-dot {
+  color: var(--peach);
+  opacity: 0.5;
+  padding: 0 0.5rem;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ===== SECTION BASE ===== */
+.section {
+  padding: clamp(6rem, 12vw, 11rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.section-label {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--peach);
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.section-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--peach);
+}
+
+/* ===== ABOUT ===== */
+#about {
+  background: var(--bg);
+  border-top: 1px solid var(--divider);
+}
+
+.about-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(4rem, 8vw, 10rem);
+  align-items: start;
+}
+
+.about-image-wrap {
+  position: relative;
+}
+
+.about-image-wrap img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  filter: sepia(10%) brightness(0.88) contrast(1.05);
+}
+
+.about-image-wrap::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(42, 42, 42, 0.5) 100%);
-  opacity: 0;
-  transition: opacity 0.5s;
+  background: linear-gradient(180deg, transparent 60%, rgba(13,11,10,0.5) 100%);
+  pointer-events: none;
+}
+
+.about-content { padding-top: 1.5rem; }
+
+.about-paragraphs {
+  margin: 2.5rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-paragraphs p {
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.about-quote {
+  border-left: 2px solid var(--peach);
+  padding: 1.5rem 0 1.5rem 2rem;
+  margin: 2.5rem 0 3.5rem;
+}
+
+.about-quote p {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.about-stats {
+  display: flex;
+  gap: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--divider);
+}
+
+.about-stat-value {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--peach);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.about-stat-label {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ===== SERVICES ===== */
+#services {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--divider);
+}
+
+.services-header {
+  max-width: 1400px;
+  margin: 0 auto 4rem;
+}
+
+.services-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5px;
+  background: var(--divider);
+  border: 1px solid var(--divider);
+}
+
+.service-card {
+  position: relative;
+  background: var(--bg-card);
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 420px;
+}
+
+.service-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), filter 0.8s;
+  filter: brightness(0.25) saturate(0.8);
+}
+
+.service-card:hover .service-card-bg {
+  transform: scale(1.05);
+  filter: brightness(0.4) saturate(1);
+}
+
+.service-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(13,11,10,0.9) 100%);
   z-index: 1;
 }
 
-.portfolio-item:hover::before { opacity: 1; }
-
-.portfolio-zoom {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
+.service-card-content {
+  position: relative;
   z-index: 2;
-  opacity: 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem;
+}
+
+.service-card-num {
+  font-family: var(--serif);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  color: var(--peach);
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+
+.service-card-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+
+.service-card:hover .service-card-title { color: var(--peach); }
+
+.service-card-hint {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245,237,227,0.4);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s, gap 0.3s;
+}
+
+.service-card:hover .service-card-hint {
+  color: var(--peach);
+  gap: 0.75rem;
+}
+
+.service-card-hint svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.service-card.open .service-card-hint svg { transform: rotate(45deg); }
+
+/* Service accordion */
+.service-items {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.7s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  z-index: 2;
+  background: rgba(13,11,10,0.95);
+  backdrop-filter: blur(8px);
+}
+
+.service-card.open .service-items { max-height: 800px; }
+
+.service-item {
+  padding: 1.4rem 2.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  transition: background 0.3s;
+}
+
+.service-item:hover { background: rgba(232,168,124,0.04); }
+
+.service-item-name {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.service-item-meta {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.service-item-desc {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: rgba(168,144,128,0.8);
+  margin-top: 0.4rem;
+  max-width: 380px;
+}
+
+.service-item-price {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--peach);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+/* ===== PORTFOLIO ===== */
+#portfolio {
+  background: var(--bg);
+  border-top: 1px solid var(--divider);
+}
+
+.portfolio-header {
+  max-width: 1400px;
+  margin: 0 auto 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.portfolio-count {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.portfolio-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  columns: 4;
+  column-gap: 6px;
+}
+
+.portfolio-item {
+  break-inside: avoid;
+  margin-bottom: 6px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+}
+
+.portfolio-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  filter: brightness(0.85);
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.06);
+  filter: brightness(1);
+}
+
+.portfolio-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13,11,10,0);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.4s;
 }
 
-.portfolio-item:hover .portfolio-zoom {
+.portfolio-item:hover .portfolio-item-overlay {
+  background: rgba(232,168,124,0.18);
+}
+
+.portfolio-item-label {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.4s;
+}
+
+.portfolio-item:hover .portfolio-item-label {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: none;
 }
 
-.portfolio-zoom svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--charcoal);
-  fill: none;
-  stroke-width: 2;
+.portfolio-load-more {
+  text-align: center;
+  margin-top: 3rem;
 }
 
-/* Lightbox */
+.btn-outline {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border: 1px solid rgba(245,237,227,0.2);
+  border-radius: 100px;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  transition: all 0.4s;
+}
+
+.btn-outline:hover {
+  border-color: var(--peach);
+  color: var(--peach);
+}
+
+/* ===== LIGHTBOX ===== */
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 10000;
-  background: rgba(20, 20, 20, 0.95);
+  background: rgba(13,11,10,0.97);
+  z-index: 9000;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  backdrop-filter: blur(8px);
 }
 
-.lightbox.open {
-  opacity: 1;
-  visibility: visible;
-}
+.lightbox.open { opacity: 1; pointer-events: all; }
 
 .lightbox img {
   max-width: 90vw;
-  max-height: 90vh;
+  max-height: 88vh;
   object-fit: contain;
-  transform: scale(0.95);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: default;
-}
-
-.lightbox.open img {
-  transform: scale(1);
+  border-radius: 2px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.8);
 }
 
 .lightbox-close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 44px;
-  height: 44px;
+  top: 2rem;
+  right: 2rem;
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--cream);
+  border: none;
+  color: var(--text);
+  font-size: 2rem;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  font-weight: 300;
 }
 
-.lightbox-close:hover { border-color: var(--gold); color: var(--gold); }
-
-.lightbox-close svg {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-}
+.lightbox-close:hover { opacity: 1; }
 
 .lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  background: rgba(245,237,227,0.08);
+  border: 1px solid rgba(245,237,227,0.1);
+  border-radius: 100px;
+  color: var(--text);
+  font-size: 1.2rem;
   width: 48px;
   height: 48px;
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--cream);
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   transition: all 0.3s;
 }
 
-.lightbox-nav:hover { border-color: var(--gold); color: var(--gold); }
-.lightbox-prev { left: 1.5rem; }
-.lightbox-next { right: 1.5rem; }
-
-.lightbox-nav svg {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-}
-
-.lightbox-counter {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--body);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: rgba(250, 246, 242, 0.4);
-}
-
-.portfolio-load-more {
-  display: inline-block;
-  font-family: var(--body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  padding: 16px 44px;
-  background: transparent;
-  color: var(--charcoal);
-  border: 1px solid var(--charcoal);
-  cursor: pointer;
-  transition: all 0.4s;
-}
-
-.portfolio-load-more:hover {
-  background: var(--charcoal);
-  color: var(--cream);
-}
-
-/* ========== TESTIMONIALS ========== */
-.testimonials {
-  background: var(--blush-light);
-  position: relative;
-  overflow: hidden;
-}
-
-.testimonials::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 80% 20%, rgba(201, 169, 110, 0.06), transparent 60%);
-}
-
-.testimonials-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-}
-
-.testimonial-slider {
-  position: relative;
-  overflow: hidden;
-}
-
-.testimonial-slide {
-  display: none;
-  animation: fadeSlide 0.8s ease;
-}
-
-.testimonial-slide.active { display: block; }
-
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.testimonial-quote-mark {
-  font-family: var(--heading);
-  font-size: 5rem;
-  line-height: 1;
-  color: var(--gold-light);
-  margin-bottom: -1rem;
-  opacity: 0.5;
-}
-
-.testimonial-text {
-  font-family: var(--heading);
-  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.7;
-  color: var(--charcoal);
-  margin-bottom: 2rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.testimonial-author {
-  font-family: var(--body);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--blush-deep);
-}
-
-.testimonial-dots {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 3rem;
-}
-
-.testimonial-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--blush-deep);
-  opacity: 0.3;
-  cursor: pointer;
-  transition: all 0.4s;
-  border: none;
-  padding: 0;
-}
-
-.testimonial-dot.active {
-  opacity: 1;
-  background: var(--gold);
-  transform: scale(1.3);
-}
-
-/* ========== STAFF ========== */
-.staff { background: var(--white); }
-
-.staff-header {
-  max-width: 600px;
-  margin-bottom: 4rem;
-}
-
-.staff-header p {
-  font-weight: 300;
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: var(--text-light);
-}
-
-.staff-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(2.5rem, 5vw, 5rem);
-  align-items: center;
-}
-
-.staff-photo {
-  aspect-ratio: 3/4;
-  position: relative;
-  overflow: hidden;
-}
-
-.staff-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.staff-photo-frame {
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  bottom: 20px;
-  left: 20px;
-  border: 1px solid var(--gold-light);
-  pointer-events: none;
-}
-
-.staff-bio {
-  padding: 1rem 0;
-}
-
-.staff-name {
-  font-family: var(--heading);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 300;
-  color: var(--charcoal);
-  margin-bottom: 0.3rem;
-}
-
-.staff-role {
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 2rem;
-  display: block;
-}
-
-.staff-bio p {
-  font-family: var(--body);
-  font-size: clamp(0.88rem, 1.1vw, 0.95rem);
-  font-weight: 300;
-  line-height: 1.9;
-  color: var(--text-light);
-  margin-bottom: 1.25rem;
-}
-
-.staff-bio-quote {
-  font-family: var(--heading) !important;
-  font-size: clamp(1.15rem, 1.8vw, 1.4rem) !important;
-  font-weight: 300 !important;
-  font-style: italic;
-  color: var(--charcoal) !important;
-  line-height: 1.6 !important;
-  border-left: 2px solid var(--gold);
-  padding-left: 1.5rem;
-  margin-top: 2rem !important;
-  margin-bottom: 0 !important;
-}
-
-@media (max-width: 900px) {
-  .staff-inner {
-    grid-template-columns: 1fr;
-    max-width: 550px;
-  }
-  .staff-photo { max-width: 450px; }
-  .staff-photo-frame { display: none; }
-}
-
-/* ========== NEWSLETTER / CTA BANNER ========== */
-.cta-banner {
-  background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-soft) 100%);
-  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 6rem);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-banner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(201, 169, 110, 0.08), transparent 60%);
-}
-
-.cta-banner-inner {
-  position: relative;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.cta-banner h2 {
-  font-family: var(--heading);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 300;
-  color: var(--cream);
-  margin-bottom: 1rem;
-}
-
-.cta-banner h2 em {
-  font-style: italic;
-  color: var(--blush);
-}
-
-.cta-banner p {
-  font-weight: 300;
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: rgba(250, 246, 242, 0.5);
-  margin-bottom: 2.5rem;
-}
-
-.newsletter-form {
-  display: flex;
-  gap: 0;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.newsletter-form input {
-  flex: 1;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-right: none;
-  color: var(--cream);
-  font-family: var(--body);
-  font-size: 0.85rem;
-  font-weight: 300;
-  outline: none;
-  transition: all 0.3s;
-}
-
-.newsletter-form input::placeholder { color: rgba(250, 246, 242, 0.3); }
-.newsletter-form input:focus { border-color: var(--gold); background: rgba(255, 255, 255, 0.08); }
-
-.newsletter-form button {
-  padding: 16px 28px;
-  background: var(--gold);
-  border: 1px solid var(--gold);
-  color: var(--charcoal);
-  font-family: var(--body);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.4s;
-  white-space: nowrap;
-}
-
-.newsletter-form button:hover {
-  background: var(--gold-light);
-}
-
-/* ========== CONTACT ========== */
-.contact {
-  background: var(--cream);
-}
-
-.contact-inner {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(3rem, 6vw, 6rem);
-}
-
-.contact-info p {
-  font-weight: 300;
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: var(--text-light);
-  margin-bottom: 3rem;
-}
-
-.contact-detail {
-  margin-bottom: 2rem;
-}
-
-.contact-detail-label {
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-}
-
-.contact-detail-value {
-  font-family: var(--heading);
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: var(--charcoal);
-}
-
-.contact-detail-value a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.contact-detail-value a:hover { color: var(--blush-deep); }
-
-.contact-socials {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-}
-
-.contact-social {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  color: var(--text-light);
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  transition: color 0.3s;
-}
-
-.contact-social:hover { color: var(--charcoal); }
-
-.contact-social svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-
-.contact-form-wrapper {
-  background: var(--white);
-  padding: clamp(2rem, 4vw, 3.5rem);
-}
-
-.contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
-
-.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-
-.form-group label {
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--text-light);
-}
-
-.form-group input,
-.form-group textarea {
-  padding: 14px 0;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--cream-dark);
-  font-family: var(--body);
-  font-size: 0.9rem;
-  font-weight: 300;
-  color: var(--charcoal);
-  outline: none;
-  transition: border-color 0.3s;
-  resize: none;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--gold);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: var(--blush-deep);
-  opacity: 0.4;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.form-submit {
-  display: inline-block;
-  padding: 16px 40px;
-  background: var(--charcoal);
-  color: var(--cream);
-  border: none;
-  font-family: var(--body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.4s;
-  align-self: flex-start;
-  margin-top: 0.5rem;
-}
-
-.form-submit:hover { background: var(--gold); color: var(--charcoal); }
-
-/* ========== FOOTER ========== */
-.footer {
-  background: var(--charcoal);
-  padding: clamp(3rem, 5vw, 4rem) clamp(1.5rem, 6vw, 6rem);
-}
-
-.footer-inner {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.footer-logo {
-  height: 60px;
-  width: auto;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.85;
-  margin-bottom: 0.5rem;
-}
-
-.footer-brand span {
-  display: block;
-  font-size: 0.6rem;
-  font-family: var(--body);
-  font-weight: 300;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(250, 246, 242, 0.35);
-}
-
-.footer-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-
-.footer-links a {
-  font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: rgba(250, 246, 242, 0.4);
-  transition: color 0.3s;
-}
-
-.footer-links a:hover { color: var(--cream); }
-
-.footer-copy {
-  width: 100%;
-  text-align: center;
-  padding-top: 2rem;
-  margin-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: 0.7rem;
-  font-weight: 300;
-  color: rgba(250, 246, 242, 0.25);
-  letter-spacing: 0.05em;
-}
-
-/* ========== BACK TO TOP ========== */
-.back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 44px;
-  height: 44px;
-  background: var(--charcoal);
-  color: var(--cream);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 100;
-}
-
-.back-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.back-to-top:hover { background: var(--gold); color: var(--charcoal); }
-
-.back-to-top svg {
-  width: 16px;
-  height: 16px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-}
-
-/* ========== RESPONSIVE ========== */
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .portfolio-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .portfolio-item:nth-child(1) {
-    grid-column: 1 / 3;
-  }
-
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Small tablet / large phone */
-@media (max-width: 900px) {
-  .about-inner,
-  .contact-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .about-image { max-width: 500px; }
-  .about-image-frame { display: none; }
-
-  /* Mobile nav */
-  .nav-links { display: none; }
-  .menu-toggle { display: flex; }
-
-  .nav-links.open {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    inset: 0;
-    background: var(--cream);
-    justify-content: center;
-    align-items: center;
-    gap: 1.8rem;
-    z-index: 999;
-    padding: 2rem;
-  }
-
-  .nav-links.open a {
-    font-size: 1rem;
-    letter-spacing: 0.25em;
-  }
-
-  .nav-links.open .nav-book {
-    margin-top: 1rem;
-    padding: 14px 36px !important;
-    font-size: 0.75rem !important;
-  }
-
-  .form-row { grid-template-columns: 1fr; }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-form-wrapper {
-    padding: clamp(1.5rem, 4vw, 3.5rem);
-  }
-
-  .testimonial-text {
-    font-size: clamp(1.1rem, 4vw, 1.4rem);
-  }
-}
-
-/* Phone */
-@media (max-width: 600px) {
-  /* Hero */
-  .hero { min-height: 100svh; }
-  .hero-badge::before,
-  .hero-badge::after { display: none; }
-  .hero-badge { padding: 8px 20px; margin-bottom: 2rem; }
-  .hero h1 { font-size: clamp(2.4rem, 10vw, 3.2rem); }
-  .hero-sub { font-size: 1rem; margin-bottom: 2rem; }
-  .hero-cta { padding: 16px 36px; }
-  .hero-scroll { display: none; }
-
-  /* Nav */
-  .nav { height: 68px; padding: 0 1rem; }
-  .nav.scrolled { height: 60px; }
-  .nav-logo img { height: 50px; margin-left: -0.5rem; }
-  .nav.scrolled .nav-logo img { height: 44px; }
-  .nav-logo-text { font-size: 1rem; }
-  .nav-logo { gap: 0.5rem; }
-
-  /* Sections */
-  .section { padding: clamp(3.5rem, 8vw, 5rem) 1.25rem; }
-
-  /* About */
-  .about-stats { flex-direction: column; gap: 1.5rem; }
-  .about-quote { padding-left: 1.25rem; }
-  .section-title { font-size: clamp(1.8rem, 7vw, 2.5rem); }
-
-  /* Services */
-  .service-card { padding: 1.5rem; }
-  .service-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
-  .service-item { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-  .service-price { margin-left: 0; font-size: 0.9rem; }
-  .service-desc { max-width: 100%; }
-
-  /* Portfolio */
-  .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.35rem;
-  }
-  .portfolio-item:nth-child(1) {
-    grid-column: 1 / 3;
-  }
-  .portfolio-zoom { width: 32px; height: 32px; }
-  .portfolio-zoom svg { width: 13px; height: 13px; }
-  .portfolio-load-more { padding: 14px 32px; font-size: 0.65rem; }
-
-  /* Testimonials */
-  .testimonial-quote-mark { font-size: 3.5rem; }
-
-  /* Staff */
-  .staff-inner { gap: 2rem; }
-  .staff-name { font-size: 1.8rem; }
-  .staff-role { margin-bottom: 1.5rem; }
-  .staff-bio-quote { padding-left: 1.25rem; }
-
-  /* Newsletter */
-  .newsletter-form { flex-direction: column; }
-  .newsletter-form input {
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: none;
-  }
-
-  /* Contact */
-  .contact-socials { flex-direction: column; gap: 1rem; }
-
-  /* Footer */
-  .footer-inner { justify-content: center; text-align: center; }
-  .footer-brand { align-items: center; }
-  .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-
-  /* Lightbox */
-  .lightbox-nav { width: 36px; height: 36px; }
-  .lightbox-prev { left: 0.75rem; }
-  .lightbox-next { right: 0.75rem; }
-  .lightbox-close { top: 0.75rem; right: 0.75rem; width: 36px; height: 36px; }
-  .lightbox-nav svg, .lightbox-close svg { width: 14px; height: 14px; }
-
-  /* Back to top */
-  .back-to-top { bottom: 1rem; right: 1rem; width: 38px; height: 38px; }
-}
-
-/* Very small phone */
-@media (max-width: 380px) {
-  .hero h1 { font-size: 2.2rem; }
-  .hero-logo { width: 80px; }
-  .nav-logo-text { display: none; }
-  .portfolio-grid { grid-template-columns: 1fr; }
-  .portfolio-item:nth-child(1) { grid-column: 1; }
-  .about-stat-num { font-size: 2rem; }
-}
-
-/* ========== HERO MOSAIC ========== */
-.hero-mosaic {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 3rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.hero-mosaic-img {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 4px 20px rgba(42, 42, 42, 0.1);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  flex-shrink: 0;
-}
-
-.hero-mosaic-img:hover {
-  transform: scale(1.12);
-  border-color: var(--gold-light);
-}
-
-.hero-mosaic-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ========== SERVICE CARD IMAGES ========== */
-.service-card-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-  margin-bottom: 1.5rem;
-  opacity: 0.8;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0.95);
-}
-
-.service-card:hover .service-card-img {
-  opacity: 1;
-  filter: brightness(1);
-}
-
-/* ========== ABOUT REAL IMAGE ========== */
-.about-image-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ========== SHOWCASE STRIP ========== */
-.showcase-strip {
-  display: flex;
-  overflow: hidden;
-  gap: 0;
-  position: relative;
-}
-
-.showcase-strip::before,
-.showcase-strip::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 80px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.showcase-strip::before {
-  left: 0;
-  background: linear-gradient(to right, var(--cream), transparent);
-}
-
-.showcase-strip::after {
-  right: 0;
-  background: linear-gradient(to left, var(--white), transparent);
-}
-
-.showcase-strip-item {
-  flex: 1;
-  min-width: 0;
-  height: 140px;
-  overflow: hidden;
-  position: relative;
+.lightbox-nav:hover {
+  background: rgba(232,168,124,0.2);
+  border-color: var(--peach);
 }
 
-.showcase-strip-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.showcase-strip-item:hover img {
-  transform: scale(1.08);
-}
-
-.showcase-strip-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem 0.75rem 0.5rem;
-  background: linear-gradient(to top, rgba(42, 42, 42, 0.6), transparent);
-  font-family: var(--body);
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(250, 246, 242, 0.9);
-  z-index: 1;
-}
-
-@media (max-width: 900px) {
-  .showcase-strip-item { height: 100px; }
-  .showcase-strip-item:nth-child(n+6) { display: none; }
-  .service-card-img { height: 160px; }
-}
+.lightbox-prev { left: 2rem; }
+.lightbox-next { right: 2rem; }
 
-@media (max-width: 600px) {
-  .hero-mosaic { gap: 0.4rem; margin-top: 2rem; }
-  .hero-mosaic-img { width: 56px; height: 56px; }
-  .showcase-strip-item { height: 80px; }
-  .showcase-strip-item:nth-child(n+5) { display: none; }
-  .showcase-strip-label { font-size: 0.5rem; padding: 1rem 0.5rem 0.35rem; }
-  .service-card-img { height: 140px; }
+/* ===== VIDEOS ===== */
+#videos {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--divider);
 }
-
-@media (max-width: 380px) {
-  .hero-mosaic-img { width: 48px; height: 48px; }
-  .showcase-strip-item:nth-child(n+4) { display: none; }
-}
-
-/* ========== VIDEOS / SEE IT IN ACTION ========== */
-.videos {
-  background: var(--charcoal);
-  position: relative;
-  overflow: hidden;
-}
-
-.videos::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-}
-
-.videos .section-label { color: var(--gold-light); }
-.videos .section-title { color: var(--cream); }
-.videos .section-title em { color: var(--blush); }
 
 .videos-header {
-  max-width: 600px;
-  margin-bottom: 3rem;
-}
-
-.videos-header p {
-  font-weight: 300;
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: rgba(250, 246, 242, 0.6);
+  max-width: 1400px;
+  margin: 0 auto 3.5rem;
 }
 
 .videos-grid {
+  max-width: 1400px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  max-width: 1300px;
-  margin: 0 auto;
+  gap: 1.25rem;
 }
 
 .video-card {
@@ -1768,373 +995,865 @@ body::after {
   border-radius: 4px;
   overflow: hidden;
   aspect-ratio: 9/16;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: border-color 0.4s;
+  background: var(--bg-card);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s;
 }
 
 .video-card:hover {
-  border-color: rgba(201, 169, 110, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
 }
 
 .video-card iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: none;
-  display: block;
-}
-
-.video-card-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem 0.75rem 0.6rem;
-  background: linear-gradient(to top, rgba(42, 42, 42, 0.7), transparent);
-  font-family: var(--body);
-  font-size: 0.6rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(250, 246, 242, 0.8);
-  z-index: 2;
   pointer-events: none;
 }
 
-@media (max-width: 1024px) {
-  .videos-grid { grid-template-columns: repeat(3, 1fr); }
+/* ===== TESTIMONIALS ===== */
+#testimonials {
+  background: var(--bg);
+  border-top: 1px solid var(--divider);
+  text-align: center;
+}
+
+.testimonials-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.testimonials-quote-mark {
+  font-family: var(--serif);
+  font-size: clamp(6rem, 12vw, 10rem);
+  line-height: 0.6;
+  color: var(--peach);
+  opacity: 0.35;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.testimonials-track {
+  position: relative;
+  min-height: 200px;
+}
+
+.testimonial {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  pointer-events: none;
+}
+
+.testimonial.active { opacity: 1; pointer-events: all; position: relative; }
+
+.testimonial-text {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.testimonial-author {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--peach);
+}
+
+.testimonials-dots {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.testimonials-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(245,237,227,0.15);
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+
+.testimonials-dot.active {
+  background: var(--peach);
+  width: 24px;
+  border-radius: 3px;
+}
+
+/* ===== MEET THE ARTIST ===== */
+#staff {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--divider);
+}
+
+.staff-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(4rem, 8vw, 10rem);
+  align-items: center;
+}
+
+.staff-image-wrap {
+  position: relative;
+}
+
+.staff-image-wrap img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+  filter: sepia(15%) brightness(0.82) contrast(1.08);
+}
+
+/* Grain on portrait */
+.staff-image-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+.staff-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(13,11,10,0.4) 100%);
+  pointer-events: none;
+}
+
+.staff-content { padding: 1rem 0; }
+
+.staff-name {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.staff-role {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 2.5rem;
+}
+
+.staff-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-bottom: 2.5rem;
+}
+
+.staff-bio p {
+  font-family: var(--sans);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.staff-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: rgba(245,237,227,0.65);
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 2.5rem;
+}
+
+.staff-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.staff-tag {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--divider);
+  padding: 7px 16px;
+  border-radius: 100px;
+  transition: all 0.3s;
+}
+
+.staff-tag:hover {
+  border-color: var(--peach);
+  color: var(--peach);
+}
+
+/* ===== NEWSLETTER ===== */
+#newsletter {
+  background: var(--bg);
+  border-top: 1px solid var(--divider);
+  text-align: center;
+}
+
+.newsletter-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.newsletter-heading {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.newsletter-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 2px;
+  background: var(--peach);
+}
+
+.newsletter-heading em {
+  font-style: italic;
+  color: var(--peach);
+}
+
+.newsletter-sub {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  margin-top: 1.5rem;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  padding: 15px 20px;
+  border-radius: 100px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.newsletter-input::placeholder { color: var(--text-muted); }
+.newsletter-input:focus { border-color: var(--peach); }
+
+.newsletter-btn {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 15px 28px;
+  background: var(--peach);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.4s;
+}
+
+.newsletter-btn:hover {
+  background: var(--peach-deep);
+  transform: translateY(-1px);
+}
+
+/* ===== CONTACT ===== */
+#contact {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--divider);
+}
+
+.contact-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(4rem, 8vw, 10rem);
+  align-items: start;
+}
+
+.contact-info-block { padding-top: 0.5rem; }
+
+.contact-detail {
+  margin-bottom: 2.5rem;
+}
+
+.contact-detail-label {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 0.6rem;
+}
+
+.contact-detail-value {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 400;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s;
+  display: block;
+}
+
+.contact-detail-value:hover { color: var(--peach); }
+
+.contact-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--divider);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.4s;
+}
+
+.social-link:hover {
+  border-color: var(--peach);
+  color: var(--peach);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232,168,124,0.15);
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Contact form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-input, .form-textarea {
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.3s;
+  resize: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder { color: rgba(168,144,128,0.5); }
+
+.form-input:focus,
+.form-textarea:focus { border-color: var(--peach); }
+
+.form-textarea { min-height: 120px; }
+
+.form-submit {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  background: var(--peach);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.4s;
+  margin-top: 0.5rem;
+}
+
+.form-submit:hover {
+  background: var(--peach-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(232,168,124,0.25);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--divider);
+  padding: 4rem clamp(1.5rem, 5vw, 5rem) 2.5rem;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.footer-logo img {
+  height: 80px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+
+.footer-logo img:hover { opacity: 0.65; }
+
+.footer-nav {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+}
+
+.footer-nav a {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover { color: var(--peach); }
+
+.footer-copy {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  color: rgba(168,144,128,0.4);
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1100px) {
+  .portfolio-grid { columns: 3; }
+  .videos-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 900px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .staff-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .portfolio-grid { columns: 2; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .menu-toggle { display: flex; }
+  .hero-collage { display: none; }
+  .hero-inner { max-width: 100%; padding-bottom: 120px; }
+  .videos-grid { grid-template-columns: 1fr 1fr; }
+  .newsletter-form { flex-direction: column; }
+  .form-row { grid-template-columns: 1fr; }
+  .about-stats { gap: 2.5rem; }
+}
+
+@media (max-width: 520px) {
+  .portfolio-grid { columns: 2; }
   .videos-grid { grid-template-columns: repeat(2, 1fr); }
   .video-card:nth-child(n+5) { display: none; }
-}
-
-@media (max-width: 600px) {
-  .videos-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-  .video-card:nth-child(n+5) { display: none; }
-  .video-card-label { font-size: 0.5rem; padding: 1.5rem 0.5rem 0.4rem; }
-}
-
-/* Touch device hover fix */
-@media (hover: none) {
-  .portfolio-item::before { display: none; }
-  .portfolio-zoom { display: none; }
-  .service-card:hover { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.05); }
-  .nav-links a::after { display: none; }
-}
-
-/* Safe area for notched phones */
-@supports (padding: env(safe-area-inset-bottom)) {
-  .footer { padding-bottom: calc(clamp(1.5rem, 3vw, 2rem) + env(safe-area-inset-bottom)); }
-  .nav { padding-left: calc(clamp(1.5rem, 4vw, 4rem) + env(safe-area-inset-left)); padding-right: calc(clamp(1.5rem, 4vw, 4rem) + env(safe-area-inset-right)); }
-  .lightbox-close { top: calc(1.5rem + env(safe-area-inset-top)); }
+  .hero-heading { font-size: clamp(3rem, 13vw, 5rem); }
 }
 </style>
 </head>
 <body>
 
-<!-- Navigation -->
+<!-- ========== NAV ========== -->
 <nav class="nav" id="nav">
-  <a href="#home" class="nav-logo">
-    <img src="logo.webp" alt="Diverse Hair Designs by Peachie Logo">
-    <div class="nav-logo-text">
-      Diverse Hair Designs
-      <span>by Peachie</span>
-    </div>
+  <a href="#home" class="nav-logo" aria-label="Diverse Hair Designs by Peachie">
+    <img src="logo.webp" alt="Diverse Hair Designs by Peachie">
   </a>
-  <ul class="nav-links" id="navLinks">
+  <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#staff">Staff</a></li>
+    <li><a href="#staff">Artist</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="shop.html">Shop</a></li>
     <li><a href="gift-cards.html">Gift Cards</a></li>
     <li><a href="booking.html" class="nav-book">Book Now</a></li>
   </ul>
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-    <span></span>
-    <span></span>
-    <span></span>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-badge reveal">North Carolina</div>
-    <div class="hero-heading-row reveal reveal-delay-1">
-      <img src="logo.webp" alt="Diverse Hair Designs by Peachie" class="hero-logo">
-      <h1>Your Hair,<br>Our <em>Artistry</em></h1>
-    </div>
-    <div class="hero-divider reveal reveal-delay-2"></div>
-    <p class="hero-sub reveal reveal-delay-2">
-      One client at a time. Because you deserve undivided attention&nbsp;&amp;&nbsp;care.
-    </p>
-    <a href="booking.html" class="hero-cta reveal reveal-delay-3">
-      <span>Book Your Experience</span>
-    </a>
-    <div class="hero-mosaic reveal reveal-delay-4">
-      <div class="hero-mosaic-img"><img src="images/service-color1.jpg" alt="Color work" loading="lazy"></div>
-      <div class="hero-mosaic-img"><img src="gallery/05.jpeg" alt="Balayage" loading="lazy"></div>
-      <div class="hero-mosaic-img"><img src="gallery/15.jpeg" alt="Hair styling" loading="lazy"></div>
-      <div class="hero-mosaic-img"><img src="images/service-highlights1.jpg" alt="Highlights" loading="lazy"></div>
-      <div class="hero-mosaic-img"><img src="gallery/22.jpeg" alt="Transformation" loading="lazy"></div>
+<!-- Mobile overlay -->
+<ul class="nav-overlay" id="navOverlay">
+  <li><a href="#home" class="overlay-link">Home</a></li>
+  <li><a href="#about" class="overlay-link">About</a></li>
+  <li><a href="#services" class="overlay-link">Services</a></li>
+  <li><a href="#portfolio" class="overlay-link">Portfolio</a></li>
+  <li><a href="#staff" class="overlay-link">Artist</a></li>
+  <li><a href="#contact" class="overlay-link">Contact</a></li>
+  <li><a href="shop.html" class="overlay-link">Shop</a></li>
+  <li><a href="gift-cards.html" class="overlay-link">Gift Cards</a></li>
+  <li><a href="booking.html" class="overlay-book">Book Now</a></li>
+</ul>
+
+<!-- ========== HERO ========== -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-badge">Fayetteville, North Carolina</div>
+    <h1 class="hero-heading">Your Hair,<br>Our <em>Artistry</em></h1>
+    <p class="hero-sub">One client at a time. Because you deserve undivided attention&nbsp;&amp;&nbsp;care.</p>
+    <a href="booking.html" class="hero-cta"><span>Book Your Experience</span></a>
+  </div>
+
+  <div class="hero-collage">
+    <div class="hero-collage-grid">
+      <img src="gallery/03.jpeg" alt="" class="c-tall" loading="eager">
+      <img src="gallery/07.jpeg" alt="" loading="eager">
+      <img src="gallery/14.jpeg" alt="" loading="eager">
+      <img src="gallery/22.jpeg" alt="" loading="lazy">
+      <img src="gallery/31.jpeg" alt="" loading="lazy">
     </div>
   </div>
-  <a href="#about" class="hero-scroll">
-    <span>Scroll</span>
+
+  <a href="#about" class="hero-scroll" aria-label="Scroll down">
+    <span class="hero-scroll-text">Scroll</span>
+    <div class="hero-scroll-line"></div>
   </a>
 </section>
 
-<!-- Showcase Strip -->
-<div class="showcase-strip">
-  <div class="showcase-strip-item"><img src="gallery/03.jpeg" alt="Color" loading="lazy"><span class="showcase-strip-label">Color</span></div>
-  <div class="showcase-strip-item"><img src="gallery/10.jpeg" alt="Balayage" loading="lazy"><span class="showcase-strip-label">Balayage</span></div>
-  <div class="showcase-strip-item"><img src="gallery/18.jpeg" alt="Highlights" loading="lazy"><span class="showcase-strip-label">Highlights</span></div>
-  <div class="showcase-strip-item"><img src="gallery/25.jpeg" alt="Cut &amp; Style" loading="lazy"><span class="showcase-strip-label">Cut & Style</span></div>
-  <div class="showcase-strip-item"><img src="gallery/30.jpeg" alt="Styling" loading="lazy"><span class="showcase-strip-label">Styling</span></div>
-  <div class="showcase-strip-item"><img src="gallery/40.jpeg" alt="Treatments" loading="lazy"><span class="showcase-strip-label">Treatments</span></div>
-  <div class="showcase-strip-item"><img src="gallery/50.jpeg" alt="Transformation" loading="lazy"><span class="showcase-strip-label">Transformation</span></div>
+<!-- ========== TICKER ========== -->
+<div class="ticker">
+  <div class="ticker-track" aria-hidden="true">
+    <!-- duplicated for seamless loop -->
+    <span class="ticker-item">Color</span><span class="ticker-dot">·</span>
+    <span class="ticker-item accent">Balayage</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Highlights</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Cut &amp; Style</span><span class="ticker-dot">·</span>
+    <span class="ticker-item accent">Treatments</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Transformation</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Color Correction</span><span class="ticker-dot">·</span>
+    <span class="ticker-item accent">Smoothing</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Updos</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Scalp Care</span><span class="ticker-dot">·</span>
+    <span class="ticker-item accent">Color</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Balayage</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Highlights</span><span class="ticker-dot">·</span>
+    <span class="ticker-item accent">Cut &amp; Style</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Treatments</span><span class="ticker-dot">·</span>
+    <span class="ticker-item accent">Transformation</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Color Correction</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Smoothing</span><span class="ticker-dot">·</span>
+    <span class="ticker-item accent">Updos</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Scalp Care</span><span class="ticker-dot">·</span>
+  </div>
 </div>
 
-<!-- About -->
-<section class="about section" id="about">
+<!-- ========== ABOUT ========== -->
+<section id="about" class="section">
   <div class="about-inner">
-    <div class="about-image reveal">
-      <div class="about-image-inner">
-        <img src="images/hero-salon.jpg" alt="Diverse Hair Designs salon — Peachie at work">
-      </div>
-      <div class="about-image-frame"></div>
+    <div class="about-image-wrap reveal">
+      <img src="gallery/45.jpeg" alt="Salon atmosphere at Diverse Hair Designs by Peachie" loading="lazy">
     </div>
-    <div class="about-text">
+    <div class="about-content">
       <div class="section-label reveal">Our Story</div>
       <h2 class="section-title reveal reveal-delay-1">Where Beauty Meets <em>Intention</em></h2>
-      <p class="reveal reveal-delay-2">
-        At Diverse Hair Designs by Peachie, we believe every visit should feel like a personal retreat. Our approach is simple yet rare in today's fast-paced world — we dedicate our full attention to one client at a time.
-      </p>
-      <p class="about-quote reveal reveal-delay-2">
-        "We find it very important that our clients feel empowered, and embrace the importance of self care."
-      </p>
-      <p class="reveal reveal-delay-3">
-        From precision cuts to transformative color work, every service is performed with meticulous care and artistic vision. Your hair tells your story — we're here to make sure it's beautifully told.
-      </p>
+      <div class="about-paragraphs">
+        <p class="reveal reveal-delay-2">At Diverse Hair Designs by Peachie, we believe every visit should feel like a personal retreat. Our approach is simple yet rare in today's fast-paced world — we dedicate our full attention to one client at a time.</p>
+        <p class="reveal reveal-delay-3">From precision cuts to transformative color work, every service is performed with meticulous care and artistic vision. Your hair tells your story — we're here to make sure it's beautifully told.</p>
+      </div>
+      <blockquote class="about-quote reveal reveal-delay-2">
+        <p>"We find it very important that our clients feel empowered, and embrace the importance of self care."</p>
+      </blockquote>
       <div class="about-stats reveal reveal-delay-3">
         <div>
-          <div class="about-stat-num">1:1</div>
-          <div class="about-stat-label">Client Attention</div>
+          <span class="about-stat-value">1:1</span>
+          <span class="about-stat-label">Client Attention</span>
         </div>
         <div>
-          <div class="about-stat-num">100%</div>
-          <div class="about-stat-label">Dedicated Focus</div>
+          <span class="about-stat-value">100%</span>
+          <span class="about-stat-label">Dedicated Focus</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Services -->
-<section class="services section" id="services">
+<!-- ========== SERVICES ========== -->
+<section id="services" class="section">
   <div class="services-header">
-    <div class="section-label reveal">What We Offer</div>
-    <h2 class="section-title reveal reveal-delay-1">Our <em>Services</em></h2>
-    <p class="reveal reveal-delay-2">Each service is tailored to your unique hair type, lifestyle, and personal style. All pricing reflects starting rates.</p>
+    <div class="section-label reveal">Our Services</div>
+    <h2 class="section-title reveal reveal-delay-1">Crafted for <em>You</em></h2>
   </div>
   <div class="services-grid">
-    <!-- Color Services -->
-    <div class="service-card reveal">
-      <img class="service-card-img" src="images/service-color1.jpg" alt="Hair color transformation" loading="lazy">
-      <h3>Color</h3>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Full Balayage</span>
-          <span class="service-duration">3 hr 30 min</span>
-          <span class="service-desc">Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut &amp; style.</span>
+
+    <!-- Color -->
+    <div class="service-card reveal" data-service="color">
+      <div class="service-card-bg" style="background-image: url('images/service-color1.jpg');"></div>
+      <div class="service-card-overlay"></div>
+      <div class="service-card-content">
+        <span class="service-card-num">01</span>
+        <h3 class="service-card-title">Color</h3>
+        <div class="service-card-hint">
+          <span>Explore Services</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <span class="service-price">$300+</span>
       </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Partial Highlights</span>
-          <span class="service-duration">2 hr 30 min</span>
-          <span class="service-desc">Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner &amp; style.</span>
+      <div class="service-items">
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Full Balayage</div>
+            <div class="service-item-meta">3 hr 30 min</div>
+            <div class="service-item-desc">Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut &amp; style.</div>
+          </div>
+          <span class="service-item-price">$300+</span>
         </div>
-        <span class="service-price">$190+</span>
-      </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Single Process Color</span>
-          <span class="service-duration">1 hr 30 min</span>
-          <span class="service-desc">All-over color where the entire head of hair is dyed in a single shade.</span>
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Partial Highlights</div>
+            <div class="service-item-meta">2 hr 30 min</div>
+            <div class="service-item-desc">Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner &amp; style.</div>
+          </div>
+          <span class="service-item-price">$190+</span>
         </div>
-        <span class="service-price">$125+</span>
-      </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Root Touch-Up / Gray Coverage</span>
-          <span class="service-duration">1 hr 30 min</span>
-          <span class="service-desc">For pre-existing color or gray coverage. Single color process, max 8 weeks maintenance regrowth (at least 2 inches).</span>
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Single Process Color</div>
+            <div class="service-item-meta">1 hr 30 min</div>
+            <div class="service-item-desc">All-over color where the entire head of hair is dyed in a single shade.</div>
+          </div>
+          <span class="service-item-price">$125+</span>
         </div>
-        <span class="service-price">$110+</span>
-      </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Color Correction</span>
-          <span class="service-duration">4–5 hours</span>
-          <span class="service-desc">Designed to fix unwanted hair color from box dye, fading, or a desire for a new transformation.</span>
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Root Touch-Up / Gray Coverage</div>
+            <div class="service-item-meta">1 hr 30 min · Max 8 weeks regrowth</div>
+          </div>
+          <span class="service-item-price">$110+</span>
         </div>
-        <span class="service-price">Varies</span>
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Color Correction</div>
+            <div class="service-item-meta">4–5 hours · Consultation required</div>
+            <div class="service-item-desc">Designed to fix unwanted hair color from box dye, fading, or a desire for a new transformation.</div>
+          </div>
+          <span class="service-item-price">Varies</span>
+        </div>
       </div>
     </div>
 
     <!-- Cutting -->
-    <div class="service-card reveal reveal-delay-1">
-      <img class="service-card-img" src="images/service-cut1.jpeg" alt="Precision haircut" loading="lazy">
-      <h3>Cutting</h3>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Cut, Wash &amp; Style</span>
-          <span class="service-duration">45 min</span>
+    <div class="service-card reveal reveal-delay-1" data-service="cutting">
+      <div class="service-card-bg" style="background-image: url('images/service-cut1.jpeg');"></div>
+      <div class="service-card-overlay"></div>
+      <div class="service-card-content">
+        <span class="service-card-num">02</span>
+        <h3 class="service-card-title">Cutting</h3>
+        <div class="service-card-hint">
+          <span>Explore Services</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <span class="service-price">$55+</span>
       </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Men's Cut</span>
+      <div class="service-items">
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Cut, Wash &amp; Style</div>
+            <div class="service-item-meta">45 min</div>
+          </div>
+          <span class="service-item-price">$55+</span>
         </div>
-        <span class="service-price">$25</span>
-      </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Girls Wash, Cut &amp; Blow Dry</span>
-          <span class="service-duration">Under 12 yrs &middot; 45 min</span>
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Men's Cut</div>
+          </div>
+          <span class="service-item-price">$25</span>
         </div>
-        <span class="service-price">Call</span>
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Girls Wash, Cut &amp; Blow Dry</div>
+            <div class="service-item-meta">Under 12 yrs · 45 min</div>
+          </div>
+          <span class="service-item-price">Call</span>
+        </div>
       </div>
     </div>
 
     <!-- Styling -->
-    <div class="service-card reveal reveal-delay-2">
-      <img class="service-card-img" src="images/service-updo1.jpeg" alt="Special occasion styling" loading="lazy">
-      <h3>Styling</h3>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Updos &amp; Special Occasion</span>
-          <span class="service-duration">By consultation</span>
-          <span class="service-desc">From classic updos to flowing curls — styled for your special occasion.</span>
+    <div class="service-card reveal reveal-delay-2" data-service="styling">
+      <div class="service-card-bg" style="background-image: url('images/service-updo1.jpeg');"></div>
+      <div class="service-card-overlay"></div>
+      <div class="service-card-content">
+        <span class="service-card-num">03</span>
+        <h3 class="service-card-title">Styling</h3>
+        <div class="service-card-hint">
+          <span>Explore Services</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <span class="service-price">Call</span>
+      </div>
+      <div class="service-items">
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Updos &amp; Special Occasion</div>
+            <div class="service-item-meta">By consultation</div>
+            <div class="service-item-desc">From classic updos to flowing curls — styled for your special occasion.</div>
+          </div>
+          <span class="service-item-price">Call</span>
+        </div>
       </div>
     </div>
 
     <!-- Treatments -->
-    <div class="service-card reveal reveal-delay-3">
-      <img class="service-card-img" src="images/service-treatment1.jpeg" alt="Scalp and hair treatments" loading="lazy">
-      <h3>Treatments</h3>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Scalp Treatment</span>
-          <span class="service-duration">1 hour</span>
-          <span class="service-desc">Total scalp detox — exfoliate dead skin, remove buildup. Includes scalp scan analysis, deep cleansing, hair mask, massage &amp; blow dry.</span>
+    <div class="service-card reveal reveal-delay-3" data-service="treatments">
+      <div class="service-card-bg" style="background-image: url('images/service-treatment1.jpeg');"></div>
+      <div class="service-card-overlay"></div>
+      <div class="service-card-content">
+        <span class="service-card-num">04</span>
+        <h3 class="service-card-title">Treatments</h3>
+        <div class="service-card-hint">
+          <span>Explore Services</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <span class="service-price">$65+</span>
       </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Smoothing Treatment</span>
-          <span class="service-duration">3 hours &middot; Consultation required</span>
-          <span class="service-desc">Infuses amino acids, proteins, silk &amp; pearl. Results last 4–5 months. Short $220 &middot; Medium $250 &middot; Long $300.</span>
+      <div class="service-items">
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Scalp Treatment</div>
+            <div class="service-item-meta">1 hour</div>
+            <div class="service-item-desc">Total scalp detox — exfoliate dead skin, remove buildup. Includes scalp scan analysis, deep cleansing, hair mask, massage &amp; blow dry.</div>
+          </div>
+          <span class="service-item-price">$65+</span>
         </div>
-        <span class="service-price">$220–$300</span>
+        <div class="service-item">
+          <div>
+            <div class="service-item-name">Smoothing Treatment</div>
+            <div class="service-item-meta">3 hours · Consultation required</div>
+            <div class="service-item-desc">Infuses amino acids, proteins, silk &amp; pearl. Results last 4–5 months. Short $220 · Medium $250 · Long $300.</div>
+          </div>
+          <span class="service-item-price">$220–$300</span>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- Portfolio -->
-<section class="portfolio section" id="portfolio">
+<!-- ========== PORTFOLIO ========== -->
+<section id="portfolio" class="section">
   <div class="portfolio-header">
-    <div class="section-label reveal">Our Work</div>
-    <h2 class="section-title reveal reveal-delay-1">The <em>Portfolio</em></h2>
-    <p class="reveal reveal-delay-2">A glimpse into the artistry and transformations we create every day.</p>
+    <div>
+      <div class="section-label reveal">The Work</div>
+      <h2 class="section-title reveal reveal-delay-1">Every Strand, a <em>Story</em></h2>
+    </div>
+    <div class="portfolio-count reveal reveal-delay-2">123 Transformations</div>
   </div>
-  <div class="portfolio-grid" id="portfolioGrid"></div>
-  <div style="text-align:center; margin-top:2.5rem;">
-    <button class="portfolio-load-more reveal" id="loadMoreBtn" onclick="loadMoreGallery()">
-      <span>View Full Gallery</span>
-    </button>
+  <div class="portfolio-grid" id="portfolioGrid">
+    <!-- injected by JS -->
+  </div>
+  <div class="portfolio-load-more reveal">
+    <button class="btn-outline" id="loadMoreBtn">Load More</button>
   </div>
 </section>
 
 <!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-  <img id="lightboxImg" src="" alt="Portfolio image">
-  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
-  <div class="lightbox-counter" id="lightboxCounter"></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8592;</button>
+  <img src="" alt="" id="lightboxImg">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&#8594;</button>
 </div>
 
-<!-- Testimonials -->
-<section class="testimonials section">
-  <div class="testimonials-inner">
-    <div class="section-label reveal">Client Love</div>
-    <h2 class="section-title reveal reveal-delay-1">Kind <em>Words</em></h2>
-    <div class="testimonial-slider reveal reveal-delay-2">
-      <div class="testimonial-slide active">
-        <div class="testimonial-quote-mark">&ldquo;</div>
-        <p class="testimonial-text">Peachie has completely transformed my hair and my confidence. The one-on-one attention makes you feel like the only person in the world. I wouldn't trust anyone else with my color.</p>
-        <span class="testimonial-author">Satisfied Client</span>
-      </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-quote-mark">&ldquo;</div>
-        <p class="testimonial-text">The best salon experience I've ever had. No rushing, no distractions — just pure artistry and genuine care. My balayage has never looked better.</p>
-        <span class="testimonial-author">Loyal Client</span>
-      </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-quote-mark">&ldquo;</div>
-        <p class="testimonial-text">Walking into Diverse Hair Designs feels like walking into a sanctuary. Peachie listens, understands, and always delivers beyond expectations. Truly a gem in North Carolina.</p>
-        <span class="testimonial-author">Happy Client</span>
-      </div>
-    </div>
-    <div class="testimonial-dots">
-      <button class="testimonial-dot active" data-slide="0" aria-label="Testimonial 1"></button>
-      <button class="testimonial-dot" data-slide="1" aria-label="Testimonial 2"></button>
-      <button class="testimonial-dot" data-slide="2" aria-label="Testimonial 3"></button>
-    </div>
-  </div>
-</section>
-
-<!-- Staff -->
-<section class="staff section" id="staff">
-  <div class="staff-header">
-    <div class="section-label reveal">The Team</div>
-    <h2 class="section-title reveal reveal-delay-1">Meet Our <em>Artist</em></h2>
-    <p class="reveal reveal-delay-2">The talented hand behind every transformation.</p>
-  </div>
-  <div class="staff-inner">
-    <div class="staff-photo reveal">
-      <img src="peachie.webp" alt="Peachie — Owner &amp; Lead Stylist at Diverse Hair Designs">
-      <div class="staff-photo-frame"></div>
-    </div>
-    <div class="staff-bio reveal reveal-delay-1">
-      <h3 class="staff-name">Peachie Flower</h3>
-      <span class="staff-role">Owner &amp; Lead Stylist</span>
-      <p>Our salon is owned and operated by Peachie.</p>
-      <p>Peachie is a hairstylist that specializes in haircutting, coloring — such as balayage, highlights, ombr&eacute; and color correction. She is certified in American Smoothing Treatment and Japanese Straightening with 14 years of experience in the hair industry. She graduated in 2010 with a degree in cosmetology at Paul Mitchell the School of Fayetteville.</p>
-      <p class="staff-bio-quote">Her passion for hairstyling stems from a deep desire to find joy in creativity while making a meaningful difference in people's lives. Hair is more than just hair — it is a part of our identity, culture, and life experience.</p>
-    </div>
-  </div>
-</section>
-
-<!-- See it in Action -->
-<section class="videos section" id="videos">
+<!-- ========== VIDEOS ========== -->
+<section id="videos" class="section">
   <div class="videos-header">
     <div class="section-label reveal">Behind the Chair</div>
     <h2 class="section-title reveal reveal-delay-1">See it in <em>Action</em></h2>
-    <p class="reveal reveal-delay-2">Get a first peek at the behind-the-scenes making our day productive.</p>
   </div>
   <div class="videos-grid">
     <div class="video-card reveal">
@@ -2149,270 +1868,324 @@ body::after {
     <div class="video-card reveal reveal-delay-3">
       <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/0493d339ae3044648ff8471794d03f24/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
-    <div class="video-card reveal">
+    <div class="video-card reveal reveal-delay-1">
       <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/56c0524c1a0c45e8b82d6f5675b5a450/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
-    <div class="video-card reveal reveal-delay-1">
+    <div class="video-card reveal reveal-delay-2">
       <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/92a0a8cf13a84055ade23fccd6604596/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
 </section>
 
-<!-- Newsletter CTA -->
-<section class="cta-banner">
-  <div class="cta-banner-inner reveal">
-    <h2>Stay <em>Connected</em></h2>
-    <p>Join our newsletter for exclusive offers, styling tips, and the latest from our salon.</p>
-    <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thank you!'; this.querySelector('input').value='';">
-      <input type="email" placeholder="Your email address" required aria-label="Email address">
-      <button type="submit">Subscribe</button>
+<!-- ========== TESTIMONIALS ========== -->
+<section id="testimonials" class="section">
+  <div class="testimonials-inner">
+    <span class="testimonials-quote-mark reveal" aria-hidden="true">&ldquo;</span>
+    <div class="testimonials-track reveal reveal-delay-1" id="testimonialsTrack">
+      <div class="testimonial active">
+        <p class="testimonial-text">Peachie has completely transformed my hair and my confidence. The one-on-one attention makes you feel like the only person in the world. I wouldn't trust anyone else with my color.</p>
+        <span class="testimonial-author">Satisfied Client</span>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">The best salon experience I've ever had. No rushing, no distractions — just pure artistry and genuine care. My balayage has never looked better.</p>
+        <span class="testimonial-author">Loyal Client</span>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">Walking into Diverse Hair Designs feels like walking into a sanctuary. Peachie listens, understands, and always delivers beyond expectations. Truly a gem in North Carolina.</p>
+        <span class="testimonial-author">Happy Client</span>
+      </div>
+    </div>
+    <div class="testimonials-dots reveal reveal-delay-2" id="testimonialsDots"></div>
+  </div>
+</section>
+
+<!-- ========== MEET THE ARTIST ========== -->
+<section id="staff" class="section">
+  <div class="staff-inner">
+    <div class="staff-image-wrap reveal">
+      <img src="peachie.webp" alt="Peachie Flower — Owner &amp; Lead Stylist" loading="lazy">
+    </div>
+    <div class="staff-content">
+      <div class="section-label reveal">Meet the Artist</div>
+      <h2 class="staff-name reveal reveal-delay-1">Peachie Flower</h2>
+      <div class="staff-role reveal reveal-delay-2">Owner &amp; Lead Stylist</div>
+      <div class="staff-bio">
+        <p class="reveal reveal-delay-2">Our salon is owned and operated by Peachie.</p>
+        <p class="reveal reveal-delay-3">Peachie is a hairstylist that specializes in haircutting, coloring — such as balayage, highlights, ombré and color correction. She is certified in American Smoothing Treatment and Japanese Straightening with 14 years of experience in the hair industry. She graduated in 2010 with a degree in cosmetology at Paul Mitchell the School of Fayetteville.</p>
+      </div>
+      <blockquote class="staff-quote reveal reveal-delay-3">
+        Her passion for hairstyling stems from a deep desire to find joy in creativity while making a meaningful difference in people's lives. Hair is more than just hair — it is a part of our identity, culture, and life experience.
+      </blockquote>
+      <div class="staff-tags reveal reveal-delay-4">
+        <span class="staff-tag">Balayage</span>
+        <span class="staff-tag">Color Correction</span>
+        <span class="staff-tag">Highlights &amp; Ombré</span>
+        <span class="staff-tag">American Smoothing</span>
+        <span class="staff-tag">Japanese Straightening</span>
+        <span class="staff-tag">Paul Mitchell Alumni</span>
+        <span class="staff-tag">14 Yrs Experience</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NEWSLETTER ========== -->
+<section id="newsletter" class="section">
+  <div class="newsletter-inner">
+    <h2 class="newsletter-heading reveal">Stay <em>Connected</em></h2>
+    <p class="newsletter-sub reveal reveal-delay-1">Join our newsletter for exclusive offers, styling tips, and the latest from our salon.</p>
+    <form class="newsletter-form reveal reveal-delay-2" id="newsletterForm" novalidate>
+      <input type="email" class="newsletter-input" placeholder="Your email address" autocomplete="email" required>
+      <button type="submit" class="newsletter-btn">Subscribe</button>
     </form>
   </div>
 </section>
 
-<!-- Contact -->
-<section class="contact section" id="contact">
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="section">
   <div class="contact-inner">
-    <div class="contact-info">
+    <div class="contact-info-block">
       <div class="section-label reveal">Get in Touch</div>
-      <h2 class="section-title reveal reveal-delay-1">Let's <em>Connect</em></h2>
-      <p class="reveal reveal-delay-2">Ready for your transformation? We'd love to hear from you. Reach out to schedule your appointment or ask any questions.</p>
+      <h2 class="section-title reveal reveal-delay-1">Let's Create <em>Together</em></h2>
 
-      <div class="contact-detail reveal reveal-delay-2">
-        <div class="contact-detail-label">Phone</div>
-        <div class="contact-detail-value"><a href="tel:9109920117">910-992-0117</a></div>
-      </div>
-      <div class="contact-detail reveal reveal-delay-3">
-        <div class="contact-detail-label">Location</div>
-        <div class="contact-detail-value">North Carolina</div>
+      <div style="margin-top: 3rem;">
+        <div class="contact-detail reveal reveal-delay-2">
+          <div class="contact-detail-label">Phone</div>
+          <a href="tel:9109920117" class="contact-detail-value">910-992-0117</a>
+        </div>
+        <div class="contact-detail reveal reveal-delay-3">
+          <div class="contact-detail-label">Location</div>
+          <span class="contact-detail-value">North Carolina</span>
+        </div>
+        <div class="contact-detail reveal reveal-delay-4">
+          <div class="contact-detail-label">Book Online</div>
+          <a href="booking.html" class="contact-detail-value">Reserve Your Session &rarr;</a>
+        </div>
       </div>
 
-      <div class="contact-socials reveal reveal-delay-3">
-        <a href="https://www.facebook.com/DiversehairDesignsbyPeachie" target="_blank" rel="noopener" class="contact-social">
-          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          Facebook
+      <div class="contact-socials reveal reveal-delay-4">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/DiversehairDesignsbyPeachie" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="https://www.instagram.com/diversehdbypeachie" target="_blank" rel="noopener" class="contact-social">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-          Instagram
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/diversehdbypeachie" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </a>
       </div>
     </div>
 
-    <div class="contact-form-wrapper reveal reveal-delay-2">
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We\'ll be in touch soon.'); this.reset();">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" placeholder="Jane" required>
-          </div>
-          <div class="form-group">
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" placeholder="Doe">
-          </div>
+    <form class="contact-form reveal reveal-delay-2" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="firstName">First Name</label>
+          <input type="text" id="firstName" class="form-input" placeholder="Jane" autocomplete="given-name">
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="jane@example.com" required>
+        <div class="form-field">
+          <label class="form-label" for="lastName">Last Name</label>
+          <input type="text" id="lastName" class="form-input" placeholder="Doe" autocomplete="family-name">
         </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" placeholder="(910) 000-0000">
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" rows="4" placeholder="Tell us about the look you're going for..."></textarea>
-        </div>
-        <button type="submit" class="form-submit">Send Message</button>
-      </form>
-    </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" id="email" class="form-input" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="phone">Phone</label>
+        <input type="tel" id="phone" class="form-input" placeholder="(910) 000-0000" autocomplete="tel">
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="message">Message</label>
+        <textarea id="message" class="form-textarea" placeholder="Tell us about the look you have in mind..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
+<!-- ========== FOOTER ========== -->
+<footer>
   <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="logo.webp" alt="Diverse Hair Designs by Peachie" class="footer-logo">
-      <span>by Peachie &middot; North Carolina</span>
-    </div>
-    <ul class="footer-links">
-      <li><a href="https://www.diversehairdesignsbypeachienc.com/s/shop" target="_blank" rel="noopener">Shop</a></li>
-      <li><a href="https://www.diversehairdesignsbypeachienc.com/s/gift-cards" target="_blank" rel="noopener">Gift Cards</a></li>
+    <a href="#home" class="footer-logo" aria-label="Back to top">
+      <img src="logo.webp" alt="Diverse Hair Designs by Peachie">
+    </a>
+    <ul class="footer-nav">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#staff">Artist</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="gift-cards.html">Gift Cards</a></li>
+      <li><a href="booking.html">Book Now</a></li>
     </ul>
-    <div class="footer-copy">&copy; 2026 Diverse Hair Designs by Peachie. All rights reserved.</div>
+    <p class="footer-copy">&copy; 2026 Diverse Hair Designs by Peachie. All rights reserved.</p>
   </div>
 </footer>
 
-<!-- Back to top -->
-<button class="back-to-top" id="backToTop" aria-label="Back to top">
-  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
-</button>
-
 <script>
 (function() {
-  // Navbar scroll
-  const nav = document.getElementById('nav');
-  const backToTop = document.getElementById('backToTop');
+  'use strict';
 
-  function onScroll() {
-    const y = window.scrollY;
-    nav.classList.toggle('scrolled', y > 60);
-    backToTop.classList.toggle('visible', y > 600);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // Mobile menu
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
-
-  menuToggle.addEventListener('click', function() {
-    this.classList.toggle('active');
-    navLinks.classList.toggle('open');
-    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+  /* ---- Page load fade-in ---- */
+  window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
   });
 
-  navLinks.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      menuToggle.classList.remove('active');
-      navLinks.classList.remove('open');
+  /* ---- Nav scroll state ---- */
+  var nav = document.getElementById('nav');
+  function onScroll() {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---- Mobile menu ---- */
+  var menuToggle = document.getElementById('menuToggle');
+  var navOverlay = document.getElementById('navOverlay');
+  var overlayLinks = navOverlay.querySelectorAll('a');
+
+  menuToggle.addEventListener('click', function() {
+    var open = menuToggle.classList.toggle('open');
+    navOverlay.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  overlayLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      menuToggle.classList.remove('open');
+      navOverlay.classList.remove('open');
       document.body.style.overflow = '';
     });
   });
 
-  // Scroll reveal
+  /* ---- IntersectionObserver reveals ---- */
   var reveals = document.querySelectorAll('.reveal');
-  var observer = new IntersectionObserver(function(entries) {
+  var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        revealObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  reveals.forEach(function(el) { observer.observe(el); });
+  reveals.forEach(function(el) { revealObserver.observe(el); });
 
-  // Testimonial slider
-  var slides = document.querySelectorAll('.testimonial-slide');
-  var dots = document.querySelectorAll('.testimonial-dot');
-  var current = 0;
-
-  function goToSlide(n) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = n;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-
-  dots.forEach(function(dot) {
-    dot.addEventListener('click', function() {
-      goToSlide(parseInt(this.dataset.slide));
+  /* ---- Service card accordion ---- */
+  var serviceCards = document.querySelectorAll('.service-card');
+  serviceCards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      var isOpen = card.classList.contains('open');
+      serviceCards.forEach(function(c) { c.classList.remove('open'); });
+      if (!isOpen) card.classList.add('open');
     });
   });
 
-  // Auto-advance testimonials
-  setInterval(function() {
-    goToSlide((current + 1) % slides.length);
-  }, 6000);
+  /* ---- Portfolio grid ---- */
+  var TOTAL_IMAGES = 123;
+  var INITIAL_LOAD = 24;
+  var LOAD_MORE_COUNT = 20;
+  var loadedCount = 0;
+  var allImages = [];
+  var visibleImages = [];
 
-  // Back to top
-  backToTop.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  // Build shuffled index array
+  for (var i = 1; i <= TOTAL_IMAGES; i++) { allImages.push(i); }
+  // Light shuffle for variety
+  allImages.sort(function() { return Math.random() - 0.5; });
 
-  // Smooth scroll for anchors
-  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function(e) {
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        var offset = nav.offsetHeight + 10;
-        var pos = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: pos, behavior: 'smooth' });
-      }
-    });
-  });
-
-  // Gallery
-  var galleryImages = [];
-  for (var i = 1; i <= 123; i++) {
-    galleryImages.push('gallery/' + (i < 10 ? '0' : '') + i + '.jpeg');
-  }
-
-  var INITIAL_COUNT = 12;
   var grid = document.getElementById('portfolioGrid');
   var loadMoreBtn = document.getElementById('loadMoreBtn');
-  var galleryLoaded = INITIAL_COUNT;
 
-  function createGalleryItem(index, animate) {
-    var div = document.createElement('div');
-    div.className = 'portfolio-item' + (animate ? ' reveal visible' : '');
-    div.onclick = function() { openLightbox(index); };
-    if (index === 0) div.style.gridColumn = '1 / 3';
-    div.innerHTML = '<img src="' + galleryImages[index] + '" alt="Hair transformation by Peachie" loading="lazy">' +
-      '<div class="portfolio-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>';
-    return div;
-  }
+  function padNum(n) { return n < 10 ? '0' + n : '' + n; }
 
-  // Initial load
-  for (var i = 0; i < INITIAL_COUNT; i++) {
-    var item = createGalleryItem(i, false);
-    var delays = ['', ' reveal-delay-1', ' reveal-delay-2'];
-    item.className = 'portfolio-item reveal' + delays[i % 3];
-    grid.appendChild(item);
-  }
-
-  // Re-observe initial items
-  var portfolioObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        portfolioObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  grid.querySelectorAll('.reveal').forEach(function(el) { portfolioObserver.observe(el); });
-
-  window.loadMoreGallery = function() {
+  function renderImages(count) {
     var fragment = document.createDocumentFragment();
-    for (var i = galleryLoaded; i < galleryImages.length; i++) {
-      var item = createGalleryItem(i, true);
+    var end = Math.min(loadedCount + count, allImages.length);
+    for (var j = loadedCount; j < end; j++) {
+      var imgNum = allImages[j];
+      var src = 'gallery/' + padNum(imgNum) + '.jpeg';
+      visibleImages.push(src);
+
+      var item = document.createElement('div');
+      item.className = 'portfolio-item reveal';
+      item.dataset.index = visibleImages.length - 1;
+
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Hair design ' + imgNum;
+      img.loading = 'lazy';
+
+      var overlay = document.createElement('div');
+      overlay.className = 'portfolio-item-overlay';
+
+      var label = document.createElement('span');
+      label.className = 'portfolio-item-label';
+      label.textContent = 'View';
+
+      overlay.appendChild(label);
+      item.appendChild(img);
+      item.appendChild(overlay);
+
+      item.addEventListener('click', function() {
+        openLightbox(parseInt(this.dataset.index));
+      });
+
       fragment.appendChild(item);
     }
     grid.appendChild(fragment);
-    galleryLoaded = galleryImages.length;
-    loadMoreBtn.style.display = 'none';
-  };
+    loadedCount = end;
 
-  // Lightbox
-  var lbIndex = 0;
+    // Observe new reveals
+    grid.querySelectorAll('.reveal:not(.observed)').forEach(function(el) {
+      el.classList.add('observed');
+      revealObserver.observe(el);
+    });
+
+    if (loadedCount >= allImages.length) {
+      loadMoreBtn.style.display = 'none';
+    }
+  }
+
+  renderImages(INITIAL_LOAD);
+
+  loadMoreBtn.addEventListener('click', function() {
+    renderImages(LOAD_MORE_COUNT);
+  });
+
+  /* ---- Lightbox ---- */
   var lightbox = document.getElementById('lightbox');
-  var lbImg = document.getElementById('lightboxImg');
-  var lbCounter = document.getElementById('lightboxCounter');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxClose = document.getElementById('lightboxClose');
+  var lightboxPrev = document.getElementById('lightboxPrev');
+  var lightboxNext = document.getElementById('lightboxNext');
+  var currentLightboxIndex = 0;
 
-  window.openLightbox = function(i) {
-    lbIndex = i;
-    lbImg.src = galleryImages[i];
-    lbCounter.textContent = (i + 1) + ' / ' + galleryImages.length;
+  function openLightbox(index) {
+    currentLightboxIndex = index;
+    lightboxImg.src = visibleImages[index];
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
-  };
+  }
 
-  window.closeLightbox = function() {
+  function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
-  };
+  }
 
-  window.navLightbox = function(dir) {
-    lbIndex = (lbIndex + dir + galleryImages.length) % galleryImages.length;
-    lbImg.src = galleryImages[lbIndex];
-    lbCounter.textContent = (lbIndex + 1) + ' / ' + galleryImages.length;
-  };
+  function navLightbox(dir) {
+    currentLightboxIndex = (currentLightboxIndex + dir + visibleImages.length) % visibleImages.length;
+    lightboxImg.src = visibleImages[currentLightboxIndex];
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', function() { navLightbox(-1); });
+  lightboxNext.addEventListener('click', function() { navLightbox(1); });
 
   lightbox.addEventListener('click', function(e) {
     if (e.target === lightbox) closeLightbox();
@@ -2425,241 +2198,70 @@ body::after {
     if (e.key === 'ArrowRight') navLightbox(1);
   });
 
-  // Touch swipe for lightbox
-  var touchStartX = 0;
-  var touchStartY = 0;
-  lightbox.addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-  }, { passive: true });
-  lightbox.addEventListener('touchend', function(e) {
-    var dx = e.changedTouches[0].screenX - touchStartX;
-    var dy = e.changedTouches[0].screenY - touchStartY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-      if (dx > 0) navLightbox(-1);
-      else navLightbox(1);
-    } else if (Math.abs(dy) > 80) {
-      closeLightbox();
-    }
-  }, { passive: true });
+  /* ---- Testimonials carousel ---- */
+  var testimonials = document.querySelectorAll('.testimonial');
+  var dotsContainer = document.getElementById('testimonialsDots');
+  var currentTestimonial = 0;
+  var testimonialTimer;
 
-  // Touch swipe for testimonials
-  var tSlider = document.querySelector('.testimonial-slider');
-  var tStartX = 0;
-  tSlider.addEventListener('touchstart', function(e) {
-    tStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  tSlider.addEventListener('touchend', function(e) {
-    var dx = e.changedTouches[0].screenX - tStartX;
-    if (Math.abs(dx) > 50) {
-      goToSlide((current + (dx > 0 ? -1 : 1) + slides.length) % slides.length);
-    }
-  }, { passive: true });
+  // Build dots
+  testimonials.forEach(function(_, i) {
+    var dot = document.createElement('button');
+    dot.className = 'testimonials-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
+    dot.addEventListener('click', function() { goToTestimonial(i); });
+    dotsContainer.appendChild(dot);
+  });
 
-  // ========== LOAD SITE DATA FROM JSON ==========
-  function loadSiteData() {
-    fetch('site-data.json')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        try { applyData(data); } catch(e) { console.warn('loadSiteData apply error:', e); }
-      })
-      .catch(function(e) { console.warn('site-data.json not loaded, using hardcoded content:', e); });
+  var dots = dotsContainer.querySelectorAll('.testimonials-dot');
+
+  function goToTestimonial(index) {
+    testimonials[currentTestimonial].classList.remove('active');
+    dots[currentTestimonial].classList.remove('active');
+    currentTestimonial = index;
+    testimonials[currentTestimonial].classList.add('active');
+    dots[currentTestimonial].classList.add('active');
+    clearInterval(testimonialTimer);
+    testimonialTimer = setInterval(nextTestimonial, 4000);
   }
 
-  function applyData(d) {
-    // Hero
-    var heroBadge = document.querySelector('.hero-badge');
-    if (heroBadge && d.hero.badge) heroBadge.textContent = d.hero.badge;
-
-    var heroH1 = document.querySelector('.hero h1');
-    if (heroH1 && d.hero.heading) heroH1.innerHTML = d.hero.heading;
-
-    var heroSub = document.querySelector('.hero-sub');
-    if (heroSub && d.hero.subHeading) heroSub.innerHTML = d.hero.subHeading;
-
-    var heroCta = document.querySelector('.hero-cta');
-    if (heroCta && d.hero.ctaText) heroCta.querySelector('span').textContent = d.hero.ctaText;
-    if (heroCta && d.hero.ctaLink) heroCta.href = d.hero.ctaLink;
-
-    // About
-    var aboutLabel = document.querySelector('.about .section-label');
-    if (aboutLabel && d.about.label) aboutLabel.textContent = d.about.label;
-
-    var aboutTitle = document.querySelector('.about .section-title');
-    if (aboutTitle && d.about.title) aboutTitle.innerHTML = d.about.title;
-
-    var aboutTexts = document.querySelectorAll('.about-text > p:not(.about-quote)');
-    if (d.about.paragraphs) {
-      d.about.paragraphs.forEach(function(p, i) { if (aboutTexts[i]) aboutTexts[i].textContent = p; });
-    }
-
-    var aboutQuote = document.querySelector('.about-quote');
-    if (aboutQuote && d.about.quote) aboutQuote.textContent = '\u201C' + d.about.quote + '\u201D';
-
-    if (d.about.stats) {
-      var statNums = document.querySelectorAll('.about-stat-num');
-      var statLabels = document.querySelectorAll('.about-stat-label');
-      d.about.stats.forEach(function(s, i) {
-        if (statNums[i]) statNums[i].textContent = s.value;
-        if (statLabels[i]) statLabels[i].textContent = s.label;
-      });
-    }
-
-    // Services
-    if (d.services && d.services.length) {
-      var servicesGrid = document.querySelector('.services-grid');
-      servicesGrid.innerHTML = '';
-      d.services.forEach(function(cat, ci) {
-        var card = document.createElement('div');
-        var delayClass = ci === 0 ? '' : ' reveal-delay-' + Math.min(ci, 3);
-        card.className = 'service-card reveal' + delayClass;
-
-        var html = '';
-        if (cat.image) {
-          html += '<img class="service-card-img" src="' + cat.image + '" alt="' + cat.title + '" loading="lazy">';
-        }
-        html += '<h3>' + cat.title + '</h3>';
-
-        cat.items.forEach(function(item) {
-          html += '<div class="service-item"><div>';
-          html += '<span class="service-name">' + item.name + '</span>';
-          if (item.duration) html += '<span class="service-duration">' + item.duration + '</span>';
-          if (item.desc) html += '<span class="service-desc">' + item.desc + '</span>';
-          html += '</div>';
-          html += '<span class="service-price">' + item.price + '</span>';
-          html += '</div>';
-        });
-
-        card.innerHTML = html;
-        servicesGrid.appendChild(card);
-      });
-
-      // Re-observe new service cards for reveal animation
-      servicesGrid.querySelectorAll('.reveal').forEach(function(el) {
-        observer.observe(el);
-      });
-    }
-
-    // Testimonials
-    if (d.testimonials && d.testimonials.length) {
-      var slider = document.querySelector('.testimonial-slider');
-      var dotsContainer = document.querySelector('.testimonial-dots');
-      slider.innerHTML = '';
-      dotsContainer.innerHTML = '';
-
-      d.testimonials.forEach(function(t, i) {
-        var slide = document.createElement('div');
-        slide.className = 'testimonial-slide' + (i === 0 ? ' active' : '');
-        slide.innerHTML = '<div class="testimonial-quote-mark">\u201C</div>' +
-          '<p class="testimonial-text">' + t.text + '</p>' +
-          '<span class="testimonial-author">' + t.author + '</span>';
-        slider.appendChild(slide);
-
-        var dot = document.createElement('button');
-        dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
-        dot.dataset.slide = i;
-        dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
-        dot.addEventListener('click', function() { goToSlide(parseInt(this.dataset.slide)); });
-        dotsContainer.appendChild(dot);
-      });
-
-      // Update slider references
-      slides = document.querySelectorAll('.testimonial-slide');
-      dots = document.querySelectorAll('.testimonial-dot');
-      current = 0;
-    }
-
-    // Staff
-    var staffName = document.querySelector('.staff-name');
-    if (staffName && d.staff.name) staffName.textContent = d.staff.name;
-
-    var staffRole = document.querySelector('.staff-role');
-    if (staffRole && d.staff.role) staffRole.innerHTML = d.staff.role;
-
-    var staffPhoto = document.querySelector('.staff-photo img');
-    if (staffPhoto && d.staff.photo) staffPhoto.src = d.staff.photo;
-
-    var staffBio = document.querySelector('.staff-bio');
-    if (staffBio && d.staff.bio) {
-      // Remove existing p elements and quote, rebuild
-      var existingPs = staffBio.querySelectorAll('p');
-      existingPs.forEach(function(p) { p.remove(); });
-
-      d.staff.bio.forEach(function(text) {
-        var p = document.createElement('p');
-        p.textContent = text;
-        staffBio.appendChild(p);
-      });
-
-      if (d.staff.quote) {
-        var q = document.createElement('p');
-        q.className = 'staff-bio-quote';
-        q.textContent = d.staff.quote;
-        staffBio.appendChild(q);
-      }
-    }
-
-    // Videos
-    if (d.videos && d.videos.length) {
-      var videosGrid = document.querySelector('.videos-grid');
-      videosGrid.innerHTML = '';
-      d.videos.forEach(function(v, i) {
-        var card = document.createElement('div');
-        var delayClass = i === 0 ? '' : ' reveal-delay-' + Math.min(i, 3);
-        card.className = 'video-card reveal' + delayClass;
-        card.innerHTML = '<iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/' + v.streamId + '/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>' +
-          (v.label ? '<span class="video-card-label">' + v.label + '</span>' : '');
-        videosGrid.appendChild(card);
-      });
-
-      videosGrid.querySelectorAll('.reveal').forEach(function(el) {
-        observer.observe(el);
-      });
-    }
-
-    // Contact
-    var contactPhone = document.querySelector('.contact-detail-value a[href^="tel:"]');
-    if (contactPhone && d.contact.phone) {
-      contactPhone.textContent = d.contact.phone;
-      contactPhone.href = 'tel:' + d.contact.phone.replace(/[^0-9+]/g, '');
-    }
-
-    var contactLocation = document.querySelectorAll('.contact-detail-value');
-    if (contactLocation[1] && d.contact.location) contactLocation[1].textContent = d.contact.location;
-
-    // Newsletter
-    var ctaH2 = document.querySelector('.cta-banner h2');
-    if (ctaH2 && d.newsletter.heading) ctaH2.innerHTML = d.newsletter.heading;
-
-    var ctaP = document.querySelector('.cta-banner p');
-    if (ctaP && d.newsletter.subtext) ctaP.textContent = d.newsletter.subtext;
-
-    // Gallery count
-    if (d.gallery && d.gallery.totalCount) {
-      galleryImages = [];
-      for (var i = 1; i <= d.gallery.totalCount; i++) {
-        galleryImages.push('gallery/' + (i < 10 ? '0' : '') + i + '.jpeg');
-      }
-      // Rebuild initial gallery grid
-      grid.innerHTML = '';
-      galleryLoaded = INITIAL_COUNT;
-      for (var i = 0; i < Math.min(INITIAL_COUNT, galleryImages.length); i++) {
-        var item = createGalleryItem(i, false);
-        var delays = ['', ' reveal-delay-1', ' reveal-delay-2'];
-        item.className = 'portfolio-item reveal' + delays[i % 3];
-        grid.appendChild(item);
-      }
-      grid.querySelectorAll('.reveal').forEach(function(el) { portfolioObserver.observe(el); });
-      if (galleryImages.length <= INITIAL_COUNT) {
-        loadMoreBtn.style.display = 'none';
-      } else {
-        loadMoreBtn.style.display = '';
-      }
-    }
+  function nextTestimonial() {
+    goToTestimonial((currentTestimonial + 1) % testimonials.length);
   }
 
-  // Load data (graceful degradation — if it fails, hardcoded content stays)
-  loadSiteData();
+  testimonialTimer = setInterval(nextTestimonial, 4000);
+
+  /* ---- Newsletter form ---- */
+  var newsletterForm = document.getElementById('newsletterForm');
+  newsletterForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var input = newsletterForm.querySelector('input');
+    var btn = newsletterForm.querySelector('button');
+    if (input.value && input.validity.valid) {
+      btn.textContent = 'Thank you!';
+      btn.style.background = 'var(--peach-deep)';
+      input.value = '';
+      setTimeout(function() {
+        btn.textContent = 'Subscribe';
+        btn.style.background = '';
+      }, 3000);
+    }
+  });
+
+  /* ---- Contact form ---- */
+  var contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = contactForm.querySelector('.form-submit');
+    btn.textContent = 'Message Sent!';
+    btn.style.background = 'var(--peach-deep)';
+    setTimeout(function() {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      contactForm.reset();
+    }, 3000);
+  });
+
 })();
 </script>
 </body>
