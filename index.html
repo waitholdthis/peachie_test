@@ -652,94 +652,88 @@ body::after {
   color: rgba(250, 246, 242, 0.6);
 }
 
-.services-grid {
+.services-grid-v2 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 2px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   max-width: 1300px;
   margin: 0 auto;
 }
 
-.service-card {
-  background: rgba(255, 255, 255, 0.03);
-  padding: clamp(2rem, 3vw, 3rem);
-  position: relative;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.svc2-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.service-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(201, 169, 110, 0.2);
+.svc2-card:hover {
+  border-color: rgba(201, 169, 110, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
 }
 
-.service-card-img {
+.svc2-img-wrap {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.svc2-img-wrap img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
   display: block;
-  margin-bottom: 1.5rem;
-  opacity: 0.8;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0.95);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s;
+  filter: brightness(0.88) saturate(1.05);
 }
 
-.service-card:hover .service-card-img {
-  opacity: 1;
-  filter: brightness(1);
+.svc2-card:hover .svc2-img-wrap img {
+  transform: scale(1.05);
+  filter: brightness(1) saturate(1.1);
 }
 
-.service-card h3 {
+.svc2-body {
+  padding: 1.4rem 1.5rem 1.6rem;
+}
+
+.svc2-body h3 {
   font-family: var(--heading);
-  font-size: 1.6rem;
+  font-size: 1.15rem;
   font-weight: 400;
-  margin-bottom: 1.5rem;
   color: var(--cream);
+  margin-bottom: 0.55rem;
+  letter-spacing: 0.01em;
 }
 
-.service-item {
+.svc2-body p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(250, 246, 242, 0.48);
+  margin-bottom: 1rem;
+}
+
+.svc2-meta {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  gap: 1rem;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.service-item:last-child { border-bottom: none; }
-
-.service-name {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(250, 246, 242, 0.92);
-  line-height: 1.3;
-}
-
-.service-duration {
-  display: block;
-  font-size: 0.68rem;
+.svc2-duration {
+  font-size: 0.7rem;
   color: rgba(250, 246, 242, 0.35);
-  margin-top: 2px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.service-desc {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 300;
-  line-height: 1.6;
-  color: rgba(250, 246, 242, 0.38);
-  margin-top: 5px;
-  max-width: 320px;
-}
-
-.service-price {
+.svc2-price {
   font-family: var(--heading);
   font-size: 1rem;
   font-weight: 400;
   color: var(--gold-light);
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
 /* ========== PORTFOLIO ========== */
@@ -1504,8 +1498,9 @@ body::after {
     grid-column: 1 / 3;
   }
 
-  .services-grid {
+  .services-grid-v2 {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 }
 
@@ -1548,8 +1543,9 @@ body::after {
 
   .form-row { grid-template-columns: 1fr; }
 
-  .services-grid {
-    grid-template-columns: 1fr;
+  .services-grid-v2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
 
   .contact-form-wrapper {
@@ -1590,11 +1586,9 @@ body::after {
   .section-title { font-size: clamp(1.8rem, 7vw, 2.5rem); }
 
   /* Services */
-  .service-card { padding: 1.5rem; }
-  .service-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
-  .service-item { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-  .service-price { margin-left: 0; font-size: 0.9rem; }
-  .service-desc { max-width: 100%; }
+  .services-grid-v2 { grid-template-columns: 1fr; gap: 0.75rem; }
+  .svc2-body { padding: 1.2rem; }
+  .svc2-body h3 { font-size: 1.05rem; }
 
   /* Portfolio */
   .portfolio-grid {
@@ -1685,22 +1679,6 @@ body::after {
   display: block;
 }
 
-/* ========== SERVICE CARD IMAGES ========== */
-.service-card-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-  margin-bottom: 1.5rem;
-  opacity: 0.8;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0.95);
-}
-
-.service-card:hover .service-card-img {
-  opacity: 1;
-  filter: brightness(1);
-}
 
 
 /* ========== SHOWCASE STRIP ========== */
@@ -1771,7 +1749,6 @@ body::after {
 @media (max-width: 900px) {
   .showcase-strip-item { height: 100px; }
   .showcase-strip-item:nth-child(n+6) { display: none; }
-  .service-card-img { height: 160px; }
 }
 
 @media (max-width: 600px) {
@@ -1780,7 +1757,6 @@ body::after {
   .showcase-strip-item { height: 80px; }
   .showcase-strip-item:nth-child(n+5) { display: none; }
   .showcase-strip-label { font-size: 0.5rem; padding: 1rem 0.5rem 0.35rem; }
-  .service-card-img { height: 140px; }
 }
 
 @media (max-width: 380px) {
@@ -1886,7 +1862,7 @@ body::after {
 @media (hover: none) {
   .portfolio-item::before { display: none; }
   .portfolio-zoom { display: none; }
-  .service-card:hover { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.05); }
+  .svc2-card:hover { transform: none; box-shadow: none; border-color: rgba(255, 255, 255, 0.07); }
   .nav-links a::after { display: none; }
 }
 
@@ -2212,13 +2188,15 @@ body::after {
 }
 
 /* Service card stagger with slight X drift */
-.service-card.reveal {
+.service-card.reveal,
+.svc2-card.reveal {
   transform: translateY(30px) translateX(-12px);
   transition:
     opacity  0.95s var(--ease-expo-out),
     transform 0.95s var(--ease-expo-out);
 }
-.service-card.reveal.visible {
+.service-card.reveal.visible,
+.svc2-card.reveal.visible {
   transform: translateY(0) translateX(0);
 }
 
@@ -2428,113 +2406,145 @@ body::after {
     <h2 class="section-title reveal reveal-delay-1">Our <em>Services</em></h2>
     <p class="reveal reveal-delay-2">Each service is tailored to your unique hair type, lifestyle, and personal style. All pricing reflects starting rates.</p>
   </div>
-  <div class="services-grid">
+  <div class="services-grid-v2">
 
-    <!-- Color -->
-    <div class="service-card reveal">
-      <img class="service-card-img" src="images/service-color1.jpg" alt="Hair color transformation" loading="lazy">
-      <h3>Color</h3>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Full Balayage</span>
-          <span class="service-duration">3 hr 30 min</span>
-          <span class="service-desc">Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut &amp; style.</span>
-        </div>
-        <span class="service-price">$300+</span>
+    <div class="svc2-card reveal">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_5959_1721838033.jpeg" alt="Cut Wash &amp; Style" loading="lazy">
       </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Partial Highlights</span>
-          <span class="service-duration">2 hr 30 min</span>
-          <span class="service-desc">Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner &amp; style.</span>
+      <div class="svc2-body">
+        <h3>The Cut Wash &amp; Style</h3>
+        <p>Customized cut whether you're looking for a quick trim or a complete transformation.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">45 min</span>
+          <span class="svc2-price">$55+</span>
         </div>
-        <span class="service-price">$190+</span>
-      </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Single Process Color</span>
-          <span class="service-duration">1 hr 30 min</span>
-          <span class="service-desc">All-over color where the entire head of hair is dyed in a single shade.</span>
-        </div>
-        <span class="service-price">$125+</span>
-      </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Root Touch-Up / Gray Coverage</span>
-          <span class="service-duration">1 hr 30 min</span>
-          <span class="service-desc">For pre-existing color or gray coverage. Single color process, max 8 weeks maintenance regrowth (at least 2 inches).</span>
-        </div>
-        <span class="service-price">$110+</span>
-      </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Color Correction</span>
-          <span class="service-duration">4–5 hours</span>
-          <span class="service-desc">Designed to fix unwanted hair color from box dye, fading, or a desire for a new transformation.</span>
-        </div>
-        <span class="service-price">Varies</span>
       </div>
     </div>
 
-    <!-- Cutting -->
-    <div class="service-card reveal reveal-delay-1">
-      <img class="service-card-img" src="images/service-cut1.jpeg" alt="Precision haircut" loading="lazy">
-      <h3>Cutting</h3>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Cut, Wash &amp; Style</span>
-          <span class="service-duration">45 min</span>
-        </div>
-        <span class="service-price">$55+</span>
+    <div class="svc2-card reveal reveal-delay-1">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_3236_1740024348.jpeg" alt="Full Balayage" loading="lazy">
       </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Men's Cut</span>
+      <div class="svc2-body">
+        <h3>The Full Balayage</h3>
+        <p>Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut &amp; style.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">3 hr 30 min</span>
+          <span class="svc2-price">$350+</span>
         </div>
-        <span class="service-price">$25</span>
-      </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Girls Wash, Cut &amp; Blow Dry</span>
-          <span class="service-duration">Under 12 yrs &middot; 45 min</span>
-        </div>
-        <span class="service-price">Call</span>
       </div>
     </div>
 
-    <!-- Styling -->
-    <div class="service-card reveal reveal-delay-2">
-      <img class="service-card-img" src="images/service-updo1.jpeg" alt="Special occasion styling" loading="lazy">
-      <h3>Styling</h3>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Updos &amp; Special Occasion</span>
-          <span class="service-duration">By consultation</span>
-          <span class="service-desc">From classic updos to flowing curls — styled for your special occasion.</span>
+    <div class="svc2-card reveal reveal-delay-2">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_3237_1740024416.jpeg" alt="Partial Highlights" loading="lazy">
+      </div>
+      <div class="svc2-body">
+        <h3>Partial Highlights</h3>
+        <p>Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner &amp; style.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">2 hr 30 min</span>
+          <span class="svc2-price">$190+</span>
         </div>
-        <span class="service-price">Call</span>
       </div>
     </div>
 
-    <!-- Treatments -->
-    <div class="service-card reveal reveal-delay-3">
-      <img class="service-card-img" src="images/service-treatment1.jpeg" alt="Scalp and hair treatments" loading="lazy">
-      <h3>Treatments</h3>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Scalp Treatment</span>
-          <span class="service-duration">1 hour</span>
-          <span class="service-desc">Total scalp detox — exfoliate dead skin, remove buildup. Includes scalp scan analysis, deep cleansing, hair mask, massage &amp; blow dry.</span>
-        </div>
-        <span class="service-price">$65+</span>
+    <div class="svc2-card reveal">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_3215_1740024433.jpeg" alt="Color Correction" loading="lazy">
       </div>
-      <div class="service-item">
-        <div>
-          <span class="service-name">Smoothing Treatment</span>
-          <span class="service-duration">3 hours &middot; Consultation required</span>
-          <span class="service-desc">Infuses amino acids, proteins, silk &amp; pearl. Results last 4–5 months. Short $220 &middot; Medium $250 &middot; Long $300.</span>
+      <div class="svc2-body">
+        <h3>The Color Correction</h3>
+        <p>Designed to fix unwanted hair color from box dye, fading, or desire for a new transformation. Requires a color consultation.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">4–5 hours</span>
+          <span class="svc2-price">Varies</span>
         </div>
-        <span class="service-price">$220–$300</span>
+      </div>
+    </div>
+
+    <div class="svc2-card reveal reveal-delay-1">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_2921_1740025199.jpeg" alt="Scalp Treatment" loading="lazy">
+      </div>
+      <div class="svc2-body">
+        <h3>Scalp Treatment</h3>
+        <p>Total scalp detox — exfoliate dead skin, remove buildup. Includes scan analysis, deep cleansing, hair mask, scalp massage &amp; blow dry.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">1 hour</span>
+          <span class="svc2-price">$65+</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc2-card reveal reveal-delay-2">
+      <div class="svc2-img-wrap">
+        <img src="images/smoothing_treatment.jpg" alt="Smoothing Treatment" loading="lazy">
+      </div>
+      <div class="svc2-body">
+        <h3>The Smoothing Treatment</h3>
+        <p>American smoothing system with amino acids, proteins, silk &amp; pearl. Works on all hair types. Results last 4–5 months.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">3–4 hr &middot; Consultation req.</span>
+          <span class="svc2-price">$220–$300</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc2-card reveal">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_3167_1740025040.jpeg" alt="Girls Wash, Cut &amp; Blow Dry" loading="lazy">
+      </div>
+      <div class="svc2-body">
+        <h3>Girls Wash, Cut &amp; Blow Dry</h3>
+        <p>Personalized wash, cut, and blow dry for our youngest clients. Age 12 &amp; under.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">45 min &middot; Under 12</span>
+          <span class="svc2-price">Call</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc2-card reveal reveal-delay-1">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_3177_1740025226.jpeg" alt="Single Process Color" loading="lazy">
+      </div>
+      <div class="svc2-body">
+        <h3>Single Process Color</h3>
+        <p>All-over color where the entire head of hair is dyed in a single shade — enhancing natural color or creating a complete change.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">1 hr 30 min</span>
+          <span class="svc2-price">$125+</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc2-card reveal reveal-delay-2">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_3239_1740024519.jpeg" alt="Root Touch-Up &amp; Gray Coverage" loading="lazy">
+      </div>
+      <div class="svc2-body">
+        <h3>Root Touch-Up / Gray Coverage</h3>
+        <p>Root touch up for pre-existing color or gray coverage. Single color process, max 8 weeks maintenance regrowth.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">1 hr 30 min</span>
+          <span class="svc2-price">$110+</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc2-card reveal">
+      <div class="svc2-img-wrap">
+        <img src="images/IMG_2923_1740026109.jpeg" alt="Men&apos;s Cut" loading="lazy">
+      </div>
+      <div class="svc2-body">
+        <h3>Men's Cut</h3>
+        <p>Whether it's a classic cut, fade, undercut, military haircut, or a trim — precise and clean every time.</p>
+        <div class="svc2-meta">
+          <span class="svc2-duration">Quick &amp; precise</span>
+          <span class="svc2-price">$30</span>
+        </div>
       </div>
     </div>
 
