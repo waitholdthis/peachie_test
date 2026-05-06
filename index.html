@@ -1375,13 +1375,28 @@ body::after {
   align-items: flex-start;
 }
 
+.footer-logo-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .footer-logo {
   height: 60px;
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
   opacity: 0.85;
-  margin-bottom: 0.5rem;
+}
+
+.footer-flag {
+  height: 36px;
+  width: auto;
+  object-fit: cover;
+  border-radius: 3px;
+  opacity: 0.9;
 }
 
 .footer-brand span {
@@ -2687,8 +2702,11 @@ body::after {
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="logo.webp" alt="Diverse Hair Designs by Peachie" class="footer-logo">
-      <span>by Peachie &middot; North Carolina</span>
+      <div class="footer-logo-row">
+        <img src="logo.webp" alt="Diverse Hair Designs by Peachie" class="footer-logo">
+        <img src="images/Phillippine_Flag.jpg" alt="Philippine Flag" class="footer-flag">
+      </div>
+      <span>by Peachie &middot; Fayetteville, North Carolina</span>
     </div>
     <ul class="footer-links">
       <li><a href="https://www.diversehairdesignsbypeachienc.com/s/shop" target="_blank" rel="noopener">Shop</a></li>
