@@ -7,26 +7,77 @@
     "ctaLink": "booking.html",
     "backgroundImage": "images/FayClockTower.jpg",
     "mosaic": [
-      { "image": "images/service-color1.jpg", "alt": "Color work" },
-      { "image": "gallery/05.jpeg", "alt": "Balayage" },
-      { "image": "gallery/15.jpeg", "alt": "Hair styling" },
-      { "image": "images/service-highlights1.jpg", "alt": "Highlights" },
-      { "image": "gallery/22.jpeg", "alt": "Transformation" }
+      {
+        "image": "images/service-color1.jpg",
+        "alt": "Color work"
+      },
+      {
+        "image": "gallery/05.jpeg",
+        "alt": "Balayage"
+      },
+      {
+        "image": "gallery/15.jpeg",
+        "alt": "Hair styling"
+      },
+      {
+        "image": "images/service-highlights1.jpg",
+        "alt": "Highlights"
+      },
+      {
+        "image": "gallery/22.jpeg",
+        "alt": "Transformation"
+      }
     ]
   },
   "marquee": [
-    { "image": "gallery/03.jpeg", "label": "Color" },
-    { "image": "images/service-color1.jpg", "label": "Balayage" },
-    { "image": "gallery/10.jpeg", "label": "Highlights" },
-    { "image": "images/service-highlights1.jpg", "label": "Color" },
-    { "image": "gallery/18.jpeg", "label": "Styling" },
-    { "image": "gallery/25.jpeg", "label": "Cut & Style" },
-    { "image": "images/service-updo1.jpeg", "label": "Updo" },
-    { "image": "gallery/30.jpeg", "label": "Transformation" },
-    { "image": "images/service-treatment1.jpeg", "label": "Treatment" },
-    { "image": "gallery/40.jpeg", "label": "Color" },
-    { "image": "gallery/50.jpeg", "label": "Styling" },
-    { "image": "images/service-smooth1.jpeg", "label": "Treatment" }
+    {
+      "image": "gallery/03.jpeg",
+      "label": "Color"
+    },
+    {
+      "image": "images/service-color1.jpg",
+      "label": "Balayage"
+    },
+    {
+      "image": "gallery/10.jpeg",
+      "label": "Highlights"
+    },
+    {
+      "image": "images/service-highlights1.jpg",
+      "label": "Color"
+    },
+    {
+      "image": "gallery/18.jpeg",
+      "label": "Styling"
+    },
+    {
+      "image": "gallery/25.jpeg",
+      "label": "Cut & Style"
+    },
+    {
+      "image": "images/service-updo1.jpeg",
+      "label": "Updo"
+    },
+    {
+      "image": "gallery/30.jpeg",
+      "label": "Transformation"
+    },
+    {
+      "image": "images/service-treatment1.jpeg",
+      "label": "Treatment"
+    },
+    {
+      "image": "gallery/40.jpeg",
+      "label": "Color"
+    },
+    {
+      "image": "gallery/50.jpeg",
+      "label": "Styling"
+    },
+    {
+      "image": "images/service-smooth1.jpeg",
+      "label": "Treatment"
+    }
   ],
   "about": {
     "label": "Our Story",
@@ -37,8 +88,14 @@
     ],
     "quote": "We find it very important that our clients feel empowered, and embrace the importance of self care.",
     "stats": [
-      { "value": "1:1", "label": "Client Attention" },
-      { "value": "100%", "label": "Dedicated Focus" }
+      {
+        "value": "1:1",
+        "label": "Client Attention"
+      },
+      {
+        "value": "100%",
+        "label": "Dedicated Focus"
+      }
     ]
   },
   "services": [
@@ -128,7 +185,7 @@
     }
   ],
   "staff": {
-    "name": "Peachie Flower",
+    "name": "Peachie Flower CMS Test",
     "role": "Owner & Lead Stylist",
     "photo": "peachie.webp",
     "bio": [
@@ -141,8 +198,14 @@
     "phone": "910-992-0117",
     "location": "North Carolina",
     "socials": [
-      { "platform": "Facebook", "url": "https://www.facebook.com/DiversehairDesignsbyPeachie" },
-      { "platform": "Instagram", "url": "https://www.instagram.com/diversehdbypeachie" }
+      {
+        "platform": "Facebook",
+        "url": "https://www.facebook.com/DiversehairDesignsbyPeachie"
+      },
+      {
+        "platform": "Instagram",
+        "url": "https://www.instagram.com/diversehdbypeachie"
+      }
     ]
   },
   "newsletter": {
