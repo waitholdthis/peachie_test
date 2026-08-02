@@ -50,9 +50,33 @@ No GitHub account and no access tokens needed on her side.
 
 | Section in the CMS | What it controls | File written |
 |---|---|---|
-| **Photo Gallery** | The portfolio grid — add, delete, drag to reorder. First photo shows large; first 12 show before "Load More". | `gallery.json`, photos into `gallery/` |
-| **Videos** | The "See it in Action" reel. Upload MP4s. | `videos.json`, files into `videos/` |
+| **Photo Gallery** | The portfolio grid — add, delete, drag to reorder. **No limit**: as many before-and-after photos as she likes. First photo shows large; first 12 show before "Load More". | `gallery.json`, photos into `gallery/` |
+| **Videos** | The "See it in Action" reel. Upload MP4s. **Capped at 6.** | `videos.json`, files into `videos/` |
 | **Homepage** | Hero photo + photo strip, the sliding photo reel, all 10 service cards (photo, price, duration, description), reviews, the stylist photo and bio, contact details, newsletter text. | `site-data.json`, photos into `images/` |
+
+## Limits
+
+**Videos: maximum 6.** The reel is a 3-across grid, so 6 fills two tidy rows.
+Adding a 7th and hitting Publish shows `Videos must have between 1 and 6
+item(s).` and refuses to save. To swap one out she deletes a video first, then
+adds the replacement. Note this means she is currently *at* the cap.
+
+Enforced in `cms/config.yml` on the videos list:
+
+```yaml
+min: 1
+max: 6
+```
+
+Decap only honours `max` when `min` is set as well — `max` on its own is
+silently ignored. If the limit ever needs changing, both values have to stay
+present. `index.html` also refuses to render more than 6, as a backstop for the
+file being edited outside the CMS.
+
+**Photos: no limit.** The gallery list has no `min`/`max`, so she can add every
+before-and-after she wants. The homepage shows 12, then the rest behind "Load
+More". Practical limits are page weight and repo size, not the CMS — see the
+resizing note below.
 
 ## Things worth knowing
 

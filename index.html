@@ -3065,9 +3065,18 @@ body::after {
   }
 
   // ---------- Videos (videos.json) ----------
+  var MAX_VIDEOS = 6; // Mirrors the `max` on the videos list in cms/config.yml.
+
   function applyVideos(d) {
     var list = (d && d.videos) || [];
     if (!list.length) return;
+
+    // The CMS blocks a 7th video at save time; this only catches a file edited
+    // outside the CMS, and keeps the 3-across grid to two tidy rows.
+    if (list.length > MAX_VIDEOS) {
+      console.warn('videos.json has ' + list.length + ' videos; showing the first ' + MAX_VIDEOS + '.');
+      list = list.slice(0, MAX_VIDEOS);
+    }
 
     var videosGrid = document.querySelector('.videos-grid');
     if (!videosGrid) return;

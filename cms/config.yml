@@ -55,7 +55,7 @@ collections:
   - name: 'gallery'
     label: 'Photo Gallery'
     label_singular: 'Photo Gallery'
-    description: 'The portfolio grid on the homepage. Add, remove, or drag to reorder — the first photo is shown large, and the first 12 show before "Load More".'
+    description: 'The portfolio grid on the homepage — add as many before-and-after photos as you like, there is no limit. Drag to reorder: the first photo is shown large, and the first 12 show before "Load More".'
     editor:
       preview: false
     files:
@@ -89,7 +89,7 @@ collections:
   - name: 'videos'
     label: 'Videos'
     label_singular: 'Videos'
-    description: 'The "See it in Action" reel. Videos autoplay muted and loop, so short clips work best.'
+    description: 'The "See it in Action" reel — up to 6 videos. Videos autoplay muted and loop, so short clips work best. To swap one out, delete a video first, then add the new one.'
     editor:
       preview: false
     files:
@@ -105,6 +105,11 @@ collections:
             widget: 'list'
             summary: '{{fields.label}}'
             collapsed: true
+            # The reel holds a maximum of 6 videos. Decap only enforces `max`
+            # when `min` is set too, so both are required here — `max` alone is
+            # silently ignored. Saving a 7th is blocked with a validation error.
+            min: 1
+            max: 6
             fields:
               - name: 'file'
                 label: 'Video file (MP4)'
@@ -112,7 +117,9 @@ collections:
                 required: false
                 hint: 'Upload an MP4. Keep clips short — under 25 MB each, and never above 100 MB (GitHub rejects larger files).'
               - name: 'label'
-                label: 'Caption (optional)'
+                # Decap appends its own "(optional)" marker to any field with
+                # required: false, so the label must not repeat it.
+                label: 'Caption'
                 widget: 'string'
                 required: false
               - name: 'streamId'
