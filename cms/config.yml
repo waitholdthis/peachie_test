@@ -115,7 +115,13 @@ collections:
                 label: 'Video file (MP4)'
                 widget: 'file'
                 required: false
-                hint: 'Upload an MP4. Keep clips short — under 25 MB each, and never above 100 MB (GitHub rejects larger files).'
+                # iPhones record .MOV, which Safari plays but Chrome and Firefox
+                # often will not — a video that looks fine on her phone could be
+                # broken for visitors. Reject anything that is not an .mp4 at
+                # save time. Empty is still allowed: the six Cloudflare entries
+                # have no file at all.
+                pattern: ['(^$)|(\.mp4$)', 'Must be an .mp4 file. iPhone videos save as .MOV — open the clip in Photos, tap Edit then Done to export it, or send it to yourself via email and choose "Most Compatible".']
+                hint: 'Upload an MP4. iPhone videos are .MOV and will be rejected — see the note above if you get an error. Keep clips short: under 25 MB each, never above 100 MB (GitHub rejects larger files).'
               - name: 'label'
                 # Decap appends its own "(optional)" marker to any field with
                 # required: false, so the label must not repeat it.

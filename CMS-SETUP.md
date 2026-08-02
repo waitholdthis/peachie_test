@@ -78,6 +78,34 @@ before-and-after she wants. The homepage shows 12, then the rest behind "Load
 More". Practical limits are page weight and repo size, not the CMS — see the
 resizing note below.
 
+## Editing from an iPhone
+
+Both the login and the editor work on a phone. Two things were needed to get
+there, and both matter if this is ever revisited:
+
+**Decap has no mobile layout.** Its editor hard-codes `min-width: 800px`, so on
+a 390px iPhone the form rendered about twice the screen width and had to be
+panned sideways — the upload button never came into view. `cms/index.html`
+carries CSS overrides that relax that width and stack the panes. Verified at
+0px horizontal overflow on iPhone 14, iPhone SE (320px) and Pixel 7. Those
+overrides target Decap's generated class names, so re-check them if the pinned
+Decap version in `cms/index.html` is ever bumped.
+
+**iPhone videos are .MOV, and the site cannot play them reliably.** Safari
+plays `.MOV`, but Chrome and Firefox often will not — she could upload a clip
+that looks perfect on her phone and is broken for half her visitors. The video
+file field therefore rejects anything that is not `.mp4` at save time, with an
+error explaining how to convert. An empty file is still allowed, because the
+six Cloudflare entries have no file at all.
+
+To get an MP4 off an iPhone: open the clip in Photos, tap Edit then Done (this
+re-exports it), or email it to herself and choose "Most Compatible". Setting
+**Settings → Camera → Formats → Most Compatible** makes new recordings H.264,
+though the container is still `.MOV`.
+
+Uploading over mobile data is slow — the file is base64-encoded on the way to
+GitHub, adding about a third to its size. Wi-Fi is worth the wait.
+
 ## Things worth knowing
 
 **Videos are stored in the repo.** GitHub hard-rejects any single file over

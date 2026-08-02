@@ -6,6 +6,68 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Content Manager — Diverse Hair Designs by Peachie</title>
 <link rel="icon" type="image/png" href="../favicon.png">
+<style>
+/* ---------------------------------------------------------------------------
+   Phone support.
+
+   Decap's editor hard-codes `min-width: 800px` on its editor and toolbar
+   containers, so on a phone the form renders about twice the screen width and
+   has to be panned sideways -- the upload button never even comes into view.
+   Decap ships no mobile layout of its own, so these overrides relax that width
+   and let the panes stack.
+
+   The selectors match Decap's generated Emotion class names, which always end
+   in the component name (e.g. "css-hn3jn7-EditorContainer"). The Decap version
+   is pinned in the script tag below, so an upgrade cannot silently change
+   these out from under us -- but they are worth re-checking if that pin moves.
+   --------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  [class*="EditorContainer"],
+  [class*="ToolbarContainer"],
+  [class*="PreviewPaneContainer"],
+  [class*="NoPreviewContainer"],
+  [class*="ControlPaneContainer"],
+  [class*="-Editor"] {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* The editor is a two-column grid on desktop; stack it instead. */
+  [class*="-Editor"] {
+    display: block !important;
+  }
+
+  /* Keep the save/publish toolbar reachable rather than scrolled off-screen. */
+  [class*="ToolbarContainer"] {
+    position: sticky !important;
+    top: 0;
+    z-index: 200;
+  }
+
+  /* Long file paths and hints must wrap, not force the page wider. */
+  [class*="ControlContainer"],
+  [class*="ControlTopbar"] {
+    max-width: 100% !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* Nothing inside the app should be able to push the page sideways. */
+  #nc-root, #nc-root * {
+    max-width: 100%;
+  }
+  html, body { overflow-x: hidden; }
+}
+
+/* Comfortable tap targets on touch devices. */
+@media (max-width: 900px) and (pointer: coarse) {
+  [class*="ControlContainer"] button,
+  [class*="ListItem"] button,
+  button[class*="css-"] {
+    min-height: 40px;
+  }
+}
+</style>
 </head>
 <body>
 <!-- Decap CMS, authenticated through DecapBridge (see cms/config.yml) -->
