@@ -4,8 +4,30 @@
     "heading": "Your Hair,<br>Our <em>Artistry</em>",
     "subHeading": "One client at a time. Because you deserve undivided attention&nbsp;&amp;&nbsp;care.",
     "ctaText": "Book Your Experience",
-    "ctaLink": "booking.html"
+    "ctaLink": "booking.html",
+    "backgroundImage": "images/FayClockTower.jpg",
+    "mosaic": [
+      { "image": "images/service-color1.jpg", "alt": "Color work" },
+      { "image": "gallery/05.jpeg", "alt": "Balayage" },
+      { "image": "gallery/15.jpeg", "alt": "Hair styling" },
+      { "image": "images/service-highlights1.jpg", "alt": "Highlights" },
+      { "image": "gallery/22.jpeg", "alt": "Transformation" }
+    ]
   },
+  "marquee": [
+    { "image": "gallery/03.jpeg", "label": "Color" },
+    { "image": "images/service-color1.jpg", "label": "Balayage" },
+    { "image": "gallery/10.jpeg", "label": "Highlights" },
+    { "image": "images/service-highlights1.jpg", "label": "Color" },
+    { "image": "gallery/18.jpeg", "label": "Styling" },
+    { "image": "gallery/25.jpeg", "label": "Cut & Style" },
+    { "image": "images/service-updo1.jpeg", "label": "Updo" },
+    { "image": "gallery/30.jpeg", "label": "Transformation" },
+    { "image": "images/service-treatment1.jpeg", "label": "Treatment" },
+    { "image": "gallery/40.jpeg", "label": "Color" },
+    { "image": "gallery/50.jpeg", "label": "Styling" },
+    { "image": "images/service-smooth1.jpeg", "label": "Treatment" }
+  ],
   "about": {
     "label": "Our Story",
     "title": "Where Beauty Meets <em>Intention</em>",
@@ -15,106 +37,80 @@
     ],
     "quote": "We find it very important that our clients feel empowered, and embrace the importance of self care.",
     "stats": [
-      {
-        "value": "1:1",
-        "label": "Client Attention"
-      },
-      {
-        "value": "100%",
-        "label": "Dedicated Focus"
-      }
+      { "value": "1:1", "label": "Client Attention" },
+      { "value": "100%", "label": "Dedicated Focus" }
     ]
   },
   "services": [
     {
-      "title": "Color",
-      "image": "images/service-color1.jpg",
-      "items": [
-        {
-          "name": "Full Balayage",
-          "price": "$300+",
-          "duration": "3 hr 30 min",
-          "desc": "Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut & style."
-        },
-        {
-          "name": "Partial Highlights",
-          "price": "$190+",
-          "duration": "2 hr 30 min",
-          "desc": "Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner & style."
-        },
-        {
-          "name": "Single Process Color",
-          "price": "$125+",
-          "duration": "1 hr 30 min",
-          "desc": "All-over color where the entire head of hair is dyed in a single shade."
-        },
-        {
-          "name": "Root Touch-Up / Gray Coverage",
-          "price": "$110+",
-          "duration": "1 hr 30 min",
-          "desc": "For pre-existing color or gray coverage. Single color process, max 8 weeks maintenance regrowth (at least 2 inches)."
-        },
-        {
-          "name": "Color Correction",
-          "price": "Varies",
-          "duration": "4–5 hours",
-          "desc": "Designed to fix unwanted hair color from box dye, fading, or a desire for a new transformation."
-        }
-      ]
+      "title": "The Cut Wash & Style",
+      "image": "images/IMG_5959_1721838033.jpeg",
+      "desc": "Customized cut whether you're looking for a quick trim or a complete transformation.",
+      "duration": "45 min",
+      "price": "$55+"
     },
     {
-      "title": "Cutting",
-      "image": "images/service-cut1.jpeg",
-      "items": [
-        {
-          "name": "Cut, Wash & Style",
-          "price": "$55+",
-          "duration": "45 min",
-          "desc": ""
-        },
-        {
-          "name": "Men's Cut",
-          "price": "$25",
-          "duration": "",
-          "desc": ""
-        },
-        {
-          "name": "Girls Wash, Cut & Blow Dry",
-          "price": "Call",
-          "duration": "Under 12 yrs · 45 min",
-          "desc": ""
-        }
-      ]
+      "title": "The Full Balayage",
+      "image": "images/IMG_3236_1740024348.jpeg",
+      "desc": "Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut & style.",
+      "duration": "3 hr 30 min",
+      "price": "$350+"
     },
     {
-      "title": "Styling",
-      "image": "images/service-updo1.jpeg",
-      "items": [
-        {
-          "name": "Updos & Special Occasion",
-          "price": "Call",
-          "duration": "By consultation",
-          "desc": "From classic updos to flowing curls — styled for your special occasion."
-        }
-      ]
+      "title": "Partial Highlights",
+      "image": "images/IMG_3237_1740024416.jpeg",
+      "desc": "Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner & style.",
+      "duration": "2 hr 30 min",
+      "price": "$190+"
     },
     {
-      "title": "Treatments",
-      "image": "images/service-treatment1.jpeg",
-      "items": [
-        {
-          "name": "Scalp Treatment",
-          "price": "$65+",
-          "duration": "1 hour",
-          "desc": "Total scalp detox — exfoliate dead skin, remove buildup. Includes scalp scan analysis, deep cleansing, hair mask, massage & blow dry."
-        },
-        {
-          "name": "Smoothing Treatment",
-          "price": "$220–$300",
-          "duration": "3 hours · Consultation required",
-          "desc": "Infuses amino acids, proteins, silk & pearl. Results last 4–5 months. Short $220 · Medium $250 · Long $300."
-        }
-      ]
+      "title": "The Color Correction",
+      "image": "images/IMG_3215_1740024433.jpeg",
+      "desc": "Designed to fix unwanted hair color from box dye, fading, or desire for a new transformation. Requires a color consultation.",
+      "duration": "4–5 hours",
+      "price": "Varies"
+    },
+    {
+      "title": "Scalp Treatment",
+      "image": "images/IMG_2921_1740025199.jpeg",
+      "desc": "Total scalp detox — exfoliate dead skin, remove buildup. Includes scan analysis, deep cleansing, hair mask, scalp massage & blow dry.",
+      "duration": "1 hour",
+      "price": "$65+"
+    },
+    {
+      "title": "The Smoothing Treatment",
+      "image": "images/smoothing_treatment.jpg",
+      "desc": "American smoothing system with amino acids, proteins, silk & pearl. Works on all hair types. Results last 4–5 months.",
+      "duration": "3–4 hr · Consultation req.",
+      "price": "$220–$300"
+    },
+    {
+      "title": "Girls Wash, Cut & Blow Dry",
+      "image": "images/IMG_3167_1740025040.jpeg",
+      "desc": "Personalized wash, cut, and blow dry for our youngest clients. Age 12 & under.",
+      "duration": "45 min · Under 12",
+      "price": "Call"
+    },
+    {
+      "title": "Single Process Color",
+      "image": "images/IMG_3177_1740025226.jpeg",
+      "desc": "All-over color where the entire head of hair is dyed in a single shade — enhancing natural color or creating a complete change.",
+      "duration": "1 hr 30 min",
+      "price": "$125+"
+    },
+    {
+      "title": "Root Touch-Up / Gray Coverage",
+      "image": "images/IMG_3239_1740024519.jpeg",
+      "desc": "Root touch up for pre-existing color or gray coverage. Single color process, max 8 weeks maintenance regrowth.",
+      "duration": "1 hr 30 min",
+      "price": "$110+"
+    },
+    {
+      "title": "Men's Cut",
+      "image": "images/IMG_2923_1740026109.jpeg",
+      "desc": "Whether it's a classic cut, fade, undercut, military haircut, or a trim — precise and clean every time.",
+      "duration": "Quick & precise",
+      "price": "$30"
     }
   ],
   "testimonials": [
@@ -141,51 +137,16 @@
     ],
     "quote": "Her passion for hairstyling stems from a deep desire to find joy in creativity while making a meaningful difference in people's lives. Hair is more than just hair — it is a part of our identity, culture, and life experience."
   },
-  "videos": [
-    {
-      "streamId": "ca2acd08c2114ee8900e6d5c980d632d",
-      "label": ""
-    },
-    {
-      "streamId": "8a0a3f1b9e9a439a8dfc34d04fe10bfb",
-      "label": ""
-    },
-    {
-      "streamId": "a9e8179b6589407798f7adcc14243624",
-      "label": ""
-    },
-    {
-      "streamId": "0493d339ae3044648ff8471794d03f24",
-      "label": ""
-    },
-    {
-      "streamId": "56c0524c1a0c45e8b82d6f5675b5a450",
-      "label": ""
-    },
-    {
-      "streamId": "92a0a8cf13a84055ade23fccd6604596",
-      "label": ""
-    }
-  ],
   "contact": {
     "phone": "910-992-0117",
     "location": "North Carolina",
     "socials": [
-      {
-        "platform": "Facebook",
-        "url": "https://www.facebook.com/DiversehairDesignsbyPeachie"
-      },
-      {
-        "platform": "Instagram",
-        "url": "https://www.instagram.com/diversehdbypeachie"
-      }
+      { "platform": "Facebook", "url": "https://www.facebook.com/DiversehairDesignsbyPeachie" },
+      { "platform": "Instagram", "url": "https://www.instagram.com/diversehdbypeachie" }
     ]
   },
   "newsletter": {
     "heading": "Stay <em>Connected</em>",
     "subtext": "Join our newsletter for exclusive offers, styling tips, and the latest from our salon."
-  },
-  "gallery": {
-    "totalCount": 123
   }
 }

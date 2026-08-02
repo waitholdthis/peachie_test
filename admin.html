@@ -136,12 +136,15 @@ body {
   gap: 1rem;
 }
 .admin-btn {
+  display: inline-block;
   padding: 10px 20px;
   font-family: var(--body);
   font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  text-decoration: none;
+  line-height: normal;
   border: none;
   cursor: pointer;
   transition: all 0.3s;
@@ -497,6 +500,7 @@ body {
     <h1>Site Admin</h1>
   </div>
   <div class="admin-header-right">
+    <a class="admin-btn admin-btn-secondary" href="cms/">Content Manager</a>
     <button class="admin-btn admin-btn-secondary" onclick="openTokenModal()">GitHub Token</button>
     <button class="admin-btn admin-btn-primary" onclick="saveToGitHub()">Save &amp; Deploy</button>
   </div>
@@ -583,9 +587,9 @@ body {
     <!-- SERVICES -->
     <div class="admin-panel" id="panel-services">
       <h2 class="panel-title">Services &amp; Pricing</h2>
-      <p class="panel-desc">Manage your service categories and pricing.</p>
+      <p class="panel-desc">One card per service on the homepage — photo, description, duration and price.</p>
       <div id="services-container"></div>
-      <button class="add-btn" onclick="addServiceCategory()">+ Add Service Category</button>
+      <button class="add-btn" onclick="addService()">+ Add Service</button>
     </div>
 
     <!-- TESTIMONIALS -->
@@ -626,9 +630,8 @@ body {
     <!-- VIDEOS -->
     <div class="admin-panel" id="panel-videos">
       <h2 class="panel-title">Videos</h2>
-      <p class="panel-desc">Cloudflare Stream video IDs for the "See it in Action" section.</p>
-      <div id="videos-container"></div>
-      <button class="add-btn" onclick="addVideo()">+ Add Video</button>
+      <p class="panel-desc">Videos have moved to the new Content Manager, where they can be uploaded directly instead of pasted in as IDs.</p>
+      <p class="panel-desc">Open <a href="cms/" style="color:var(--gold);font-weight:500;">the Content Manager</a> and choose <strong>Videos</strong>.</p>
     </div>
 
     <!-- CONTACT -->
@@ -666,12 +669,8 @@ body {
     <!-- GALLERY -->
     <div class="admin-panel" id="panel-gallery">
       <h2 class="panel-title">Gallery Settings</h2>
-      <p class="panel-desc">Controls how many gallery images are shown. Images are named 01.jpeg, 02.jpeg, etc. in the gallery/ folder.</p>
-      <div class="field-group">
-        <label class="field-label">Total Photo Count</label>
-        <input class="field-input" id="gallery-totalCount" type="number" min="1">
-        <div class="field-hint">Number of photos in gallery/ folder (e.g. 123 = 01.jpeg through 123.jpeg)</div>
-      </div>
+      <p class="panel-desc">The gallery has moved to the new Content Manager, where photos can be added, removed and reordered individually instead of being counted.</p>
+      <p class="panel-desc">Open <a href="cms/" style="color:var(--gold);font-weight:500;">the Content Manager</a> and choose <strong>Photo Gallery</strong>.</p>
     </div>
 
     <!-- UPLOAD PHOTOS -->
@@ -822,9 +821,6 @@ function populateForms() {
   setVal('staff-quote', siteData.staff.quote);
   renderStaffBio();
 
-  // Videos
-  renderVideos();
-
   // Contact
   setVal('contact-phone', siteData.contact.phone);
   setVal('contact-location', siteData.contact.location);
@@ -833,9 +829,6 @@ function populateForms() {
   // Newsletter
   setVal('newsletter-heading', siteData.newsletter.heading);
   setVal('newsletter-subtext', siteData.newsletter.subtext);
-
-  // Gallery
-  setVal('gallery-totalCount', siteData.gallery.totalCount);
 }
 
 function setVal(id, val) {
@@ -870,16 +863,12 @@ function collectData() {
   siteData.staff.quote = getVal('staff-quote');
   collectStaffBio();
 
-  collectVideos();
-
   siteData.contact.phone = getVal('contact-phone');
   siteData.contact.location = getVal('contact-location');
   collectSocials();
 
   siteData.newsletter.heading = getVal('newsletter-heading');
   siteData.newsletter.subtext = getVal('newsletter-subtext');
-
-  siteData.gallery.totalCount = parseInt(getVal('gallery-totalCount')) || 123;
 }
 
 // ========== ABOUT STATS ==========
@@ -903,78 +892,46 @@ function collectAboutStats() {
 }
 
 // ========== SERVICES ==========
+// Services are a flat list of cards — one card per service on the homepage,
+// each with its own photo, description, duration and price.
 function renderServices() {
   var c = document.getElementById('services-container');
   c.innerHTML = '';
-  siteData.services.forEach(function(cat, ci) {
-    var html = '<div class="service-category" data-cat="' + ci + '">';
-    html += '<div class="service-category-header" onclick="this.parentElement.querySelector(\'.service-category-body\').style.display = this.parentElement.querySelector(\'.service-category-body\').style.display === \'none\' ? \'block\' : \'none\'">';
-    html += '<h3>' + esc(cat.title) + '</h3>';
-    html += '<div class="item-card-actions"><button class="btn-icon danger" onclick="event.stopPropagation();removeServiceCategory(' + ci + ')" title="Remove">&times;</button></div>';
+  siteData.services.forEach(function(svc, i) {
+    var html = '<div class="item-card svc-card"><div class="item-card-header"><span class="item-card-title">' + esc(svc.title || 'New Service') + '</span>';
+    html += '<div class="item-card-actions"><button class="btn-icon danger" onclick="removeService(' + i + ')" title="Remove">&times;</button></div></div>';
+    html += '<div class="field-row"><div class="field-group"><label class="field-label">Service Name</label><input class="field-input svc-title" value="' + esc(svc.title) + '"></div>';
+    html += '<div class="field-group"><label class="field-label">Image Path</label><input class="field-input svc-img" value="' + esc(svc.image) + '"></div></div>';
+    html += '<div class="field-row"><div class="field-group"><label class="field-label">Duration</label><input class="field-input svc-dur" value="' + esc(svc.duration) + '"></div>';
+    html += '<div class="field-group"><label class="field-label">Price</label><input class="field-input svc-price" value="' + esc(svc.price) + '"></div></div>';
+    html += '<div class="field-group"><label class="field-label">Description</label><input class="field-input svc-desc" value="' + esc(svc.desc) + '"></div>';
     html += '</div>';
-    html += '<div class="service-category-body">';
-    html += '<div class="field-row" style="margin-bottom:1rem;"><div class="field-group"><label class="field-label">Category Name</label><input class="field-input svc-cat-title" value="' + esc(cat.title) + '"></div>';
-    html += '<div class="field-group"><label class="field-label">Image Path</label><input class="field-input svc-cat-img" value="' + esc(cat.image) + '"></div></div>';
-
-    cat.items.forEach(function(item, ii) {
-      html += '<div class="item-card"><div class="item-card-header"><span class="item-card-title">' + esc(item.name || 'New Service') + '</span>';
-      html += '<div class="item-card-actions"><button class="btn-icon danger" onclick="removeServiceItem(' + ci + ',' + ii + ')" title="Remove">&times;</button></div></div>';
-      html += '<div class="field-row"><div class="field-group"><label class="field-label">Name</label><input class="field-input svc-item-name" value="' + esc(item.name) + '"></div>';
-      html += '<div class="field-group"><label class="field-label">Price</label><input class="field-input svc-item-price" value="' + esc(item.price) + '"></div></div>';
-      html += '<div class="field-row"><div class="field-group"><label class="field-label">Duration</label><input class="field-input svc-item-dur" value="' + esc(item.duration) + '"></div>';
-      html += '<div class="field-group"><label class="field-label">Description</label><input class="field-input svc-item-desc" value="' + esc(item.desc) + '"></div></div>';
-      html += '</div>';
-    });
-
-    html += '<button class="add-btn" onclick="addServiceItem(' + ci + ')">+ Add Service</button>';
-    html += '</div></div>';
     c.innerHTML += html;
   });
 }
 
 function collectServices() {
-  var cats = document.querySelectorAll('.service-category');
   siteData.services = [];
-  cats.forEach(function(catEl) {
-    var cat = {
-      title: catEl.querySelector('.svc-cat-title').value,
-      image: catEl.querySelector('.svc-cat-img').value,
-      items: []
-    };
-    var cards = catEl.querySelectorAll('.item-card');
-    cards.forEach(function(card) {
-      cat.items.push({
-        name: card.querySelector('.svc-item-name').value,
-        price: card.querySelector('.svc-item-price').value,
-        duration: card.querySelector('.svc-item-dur').value,
-        desc: card.querySelector('.svc-item-desc').value
-      });
+  document.querySelectorAll('.svc-card').forEach(function(card) {
+    siteData.services.push({
+      title: card.querySelector('.svc-title').value,
+      image: card.querySelector('.svc-img').value,
+      desc: card.querySelector('.svc-desc').value,
+      duration: card.querySelector('.svc-dur').value,
+      price: card.querySelector('.svc-price').value
     });
-    siteData.services.push(cat);
   });
 }
 
-window.addServiceCategory = function() {
+window.addService = function() {
   collectServices();
-  siteData.services.push({ title: 'New Category', image: '', items: [] });
+  siteData.services.push({ title: 'New Service', image: '', desc: '', duration: '', price: '' });
   renderServices();
 };
 
-window.removeServiceCategory = function(i) {
+window.removeService = function(i) {
   collectServices();
   siteData.services.splice(i, 1);
-  renderServices();
-};
-
-window.addServiceItem = function(ci) {
-  collectServices();
-  siteData.services[ci].items.push({ name: '', price: '', duration: '', desc: '' });
-  renderServices();
-};
-
-window.removeServiceItem = function(ci, ii) {
-  collectServices();
-  siteData.services[ci].items.splice(ii, 1);
   renderServices();
 };
 
@@ -1040,37 +997,8 @@ window.removeStaffBio = function(i) {
 };
 
 // ========== VIDEOS ==========
-function renderVideos() {
-  var c = document.getElementById('videos-container');
-  c.innerHTML = '';
-  siteData.videos.forEach(function(v, i) {
-    c.innerHTML += '<div class="item-card"><div class="item-card-header"><span class="item-card-title">Video ' + (i + 1) + '</span>' +
-      '<div class="item-card-actions"><button class="btn-icon danger" onclick="removeVideo(' + i + ')" title="Remove">&times;</button></div></div>' +
-      '<div class="field-row"><div class="field-group"><label class="field-label">Cloudflare Stream ID</label><input class="field-input vid-id" value="' + esc(v.streamId) + '"></div>' +
-      '<div class="field-group"><label class="field-label">Label (optional)</label><input class="field-input vid-label" value="' + esc(v.label) + '"></div></div></div>';
-  });
-}
-
-function collectVideos() {
-  var ids = document.querySelectorAll('.vid-id');
-  var labels = document.querySelectorAll('.vid-label');
-  siteData.videos = [];
-  ids.forEach(function(id, i) {
-    if (id.value) siteData.videos.push({ streamId: id.value, label: labels[i].value });
-  });
-}
-
-window.addVideo = function() {
-  collectVideos();
-  siteData.videos.push({ streamId: '', label: '' });
-  renderVideos();
-};
-
-window.removeVideo = function(i) {
-  collectVideos();
-  siteData.videos.splice(i, 1);
-  renderVideos();
-};
+// Videos and the gallery now live in videos.json / gallery.json and are edited
+// in the Content Manager at /cms/, so this dashboard no longer touches them.
 
 // ========== SOCIALS ==========
 function renderSocials() {
