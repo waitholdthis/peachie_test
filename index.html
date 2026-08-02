@@ -97,9 +97,7 @@ body::after {
   color: var(--blush-deep);
 }
 
-.nav.scrolled .nav-logo img {
-  filter: brightness(0);
-}
+/* Scrolled state is styled once, further down, with the rest of the sizing. */
 
 .nav-logo {
   display: flex;
@@ -118,9 +116,13 @@ body::after {
   margin-left: -0.75rem;
 }
 
+/* Once the nav goes light, the logo becomes gold. The artwork is dusty pink,
+   so it is recoloured by the #logo-gold SVG filter near the top of <body>,
+   which floods the exact brand gold through the logo's own alpha. A
+   brightness/sepia/hue-rotate filter chain could only approximate the colour. */
 .nav.scrolled .nav-logo img {
   height: 55px;
-  filter: brightness(0);
+  filter: url(#logo-gold);
 }
 
 .nav.scrolled .menu-toggle span {
@@ -2266,6 +2268,17 @@ body::after {
 </style>
 </head>
 <body>
+
+<!-- Recolours the logo to the brand gold. feFlood paints solid gold, then
+     feComposite keeps it only where the logo has alpha, so the artwork's own
+     anti-aliased edges survive. color-interpolation-filters="sRGB" is required
+     or the flood colour is shifted by the default linearRGB space. -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <filter id="logo-gold" color-interpolation-filters="sRGB">
+    <feFlood flood-color="#c9a96e"/>
+    <feComposite in2="SourceAlpha" operator="in"/>
+  </filter>
+</svg>
 
 <!-- Navigation -->
 <nav class="nav" id="nav">
