@@ -50,7 +50,8 @@ No GitHub account and no access tokens needed on her side.
 
 | Section in the CMS | What it controls | File written |
 |---|---|---|
-| **Photo Gallery** | The portfolio grid — add, delete, drag to reorder. **No limit**: as many before-and-after photos as she likes. First photo shows large; first 12 show before "Load More". | `gallery.json`, photos into `gallery/` |
+| **Photo Gallery** | The portfolio grid — add, delete, drag to reorder. **No limit.** First photo shows large; first 12 show before "Load More". | `gallery.json`, photos into `gallery/` |
+| **Before & After** | Paired shots shown side by side under the portfolio. **No limit.** | `before-after.json`, photos into `gallery/` |
 | **Videos** | The "See it in Action" reel. Upload MP4s. **Capped at 6.** | `videos.json`, files into `videos/` |
 | **Homepage** | Hero photo + photo strip, the sliding photo reel, all 10 service cards (photo, price, duration, description), reviews, the stylist photo and bio, contact details, newsletter text. | `site-data.json`, photos into `images/` |
 
@@ -77,6 +78,28 @@ file being edited outside the CMS.
 before-and-after she wants. The homepage shows 12, then the rest behind "Load
 More". Practical limits are page weight and repo size, not the CMS — see the
 resizing note below.
+
+## The Before & After section
+
+Sits directly under the portfolio on the homepage. Each entry is a pair, and
+the two photos are always shown **side by side** — on a phone the pairs stack
+but each pair keeps its two shots beside each other, since that comparison is
+the entire point.
+
+**Both halves are required.** A pair with only one photo is skipped when the
+page renders, and the whole section stays hidden until at least one complete
+pair exists — so it can never appear as an empty band on the site. It ships
+empty, and appears the moment she adds her first pair.
+
+Photos come from the same `gallery/` folder as the portfolio, so an existing
+portfolio shot can be picked as a "before" without uploading it twice.
+
+Tips worth passing on: portrait photos work best, and matching the framing and
+distance between the two shots makes the comparison far more convincing — both
+halves are cropped to the same 3:4 shape.
+
+The section heading ("Before & After") is fixed in `index.html`, matching how
+the Portfolio and Videos headings work. Only the pairs are editable in the CMS.
 
 ## Editing from an iPhone
 

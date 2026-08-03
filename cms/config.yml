@@ -84,6 +84,47 @@ collections:
                 default: 'Hair transformation by Peachie'
 
   # =========================================================================
+  # BEFORE & AFTER — paired transformation shots
+  # =========================================================================
+  - name: 'beforeafter'
+    label: 'Before & After'
+    label_singular: 'Before & After'
+    description: 'Pairs of photos shown side by side — as many as you like. Both halves are required: a pair with only one photo is skipped, and the whole section stays hidden until at least one complete pair exists.'
+    editor:
+      preview: false
+    files:
+      - name: 'pairs'
+        label: 'Before & After Pairs'
+        file: 'before-after.json'
+        # Shares the gallery folder so existing portfolio shots can be reused
+        # as a "before" without uploading them a second time.
+        media_folder: '/gallery'
+        public_folder: 'gallery'
+        fields:
+          - name: 'pairs'
+            label: 'Pairs'
+            label_singular: 'Pair'
+            widget: 'list'
+            summary: '{{fields.label}}'
+            collapsed: true
+            fields:
+              - name: 'before'
+                label: 'Before photo'
+                widget: 'image'
+                required: true
+                hint: 'The shot taken before the appointment. Portrait photos look best — both halves are cropped to the same shape.'
+              - name: 'after'
+                label: 'After photo'
+                widget: 'image'
+                required: true
+                hint: 'The finished result. Try to match the framing of the before photo so the pair lines up.'
+              - name: 'label'
+                label: 'Caption'
+                widget: 'string'
+                required: false
+                hint: 'Shown under the pair, e.g. "Balayage & cut". Leave blank for no caption.'
+
+  # =========================================================================
   # VIDEOS — the "See it in Action" section
   # =========================================================================
   - name: 'videos'
